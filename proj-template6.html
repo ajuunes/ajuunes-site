@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayings of the Word</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Verdana', sans-serif;
+      background: #f4f1ec;
+      color: #111;
+    }
+
+    header {
+      background: #111;
+      color: #fefefe;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 2.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: none;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    .intro {
+      text-align: center;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      color: #333;
+      font-weight: 400;
+      line-height: 1.6;
+      background: #f4f1ec;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .video-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      gap: 3rem;
+    }
+
+    .clip {
+      width: 90%;
+      max-width: 720px;
+      position: relative;
+      border: 2px solid #222;
+      background: #000;
+    }
+
+    .clip video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .caption-bar {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(240, 240, 240, 0.9);
+      color: #111;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      text-align: center;
+      padding: 0.75rem 0;
+      border-top: 1px solid #aaa;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 0 #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+      background: #f0eeea;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    sayings of the word
+  </header>
+
+  <div class="intro">
+    consider the profound impact of words on our shared human experience
+  </div>
+
+  <section class="video-stack">
+    <div class="clip">
+      <video src="sayings-of-the-word/earth01.mp4" autoplay loop muted></video>
+      <div class="caption-bar">earth01</div>
+    </div>
+    <div class="clip">
+      <video src="sayings-of-the-word/a message from.mp4" autoplay loop muted></video>
+      <div class="caption-bar">a mesaage from</div>
+    </div>
+    <div class="clip">
+      <video src="sayings-of-the-word/eie01.mp4" autoplay loop muted></video>
+      <div class="caption-bar">E.I.E.</div>
+    </div>
+    <div class="clip">
+      <video src="sayings-of-the-word/plutocrat01.mp4" autoplay loop muted></video>
+      <div class="caption-bar">plutocrat01</div>
+    </div>
+  </section>
+
+  <footer>
+    Project by [Your Name] — Tape-deck poetry and analog anxiety.
+  </footer>
+</body>
+</html>

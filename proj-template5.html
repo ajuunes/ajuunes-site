@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>agamemnon juunes: face</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background: #fdfaf6;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(to right, #5d3a3a, #222);
+      color: #fff;
+      padding: 3rem 1rem 1rem;
+      text-align: left;
+      font-size: 3rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding-left: 2rem;
+    }
+
+    .wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    .project-summary {
+      padding: 2rem;
+      background: #ffe;
+      border-right: 2px dashed #888;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .project-summary h2 {
+      margin-top: 0;
+      color: #9e4b4b;
+      font-size: 1.5rem;
+    }
+
+    .project-summary p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .main-visual {
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .main-visual img {
+      max-height: 80vh;
+      max-width: 100%;
+      border: 8px solid #fff;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    .media-gallery {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 2rem;
+      background: #e6e3dd;
+      padding: 2rem;
+    }
+
+    .media-item {
+      flex: 0 0 300px;
+      background: #fff;
+      border: 2px solid #aaa;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .media-item img,
+    .media-item video {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+    .media-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .media-desc {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    @media (max-width: 800px) {
+      .wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    faces
+  </header>
+
+  <div class="wrapper">
+    <div class="project-summary">
+      <h2>everyone has a different face</h2>
+      <p>we encounter a gallery of faces, each a note in the intricate narrative of our shared human drama.
+    </p>
+    </div>
+    <div class="main-visual">
+      <img src="face-frag.jpg" alt="Primary visual of fragmented face" />
+    </div>
+  </div>
+
+  <section class="media-gallery">
+    <div class="media-item">
+      <img src="grid_eyes.jpg" alt="Eyes grid" />
+      <div class="media-title">Eyeset 404</div>
+      <div class="media-desc">A tiled gallery of isolated gaze components.</div>
+    </div>
+    <div class="media-item">
+      <video src="teethloop.mp4" controls></video>
+      <div class="media-title">Dental Archive</div>
+      <div class="media-desc">An archived smile — looped and desaturated.</div>
+    </div>
+    <div class="media-item">
+      <img src="headspin.gif" alt="Spinning head" />
+      <div class="media-title">Rotator</div>
+      <div class="media-desc">Endlessly rotating sculpture of persona in drift.</div>
+    </div>
+  </section>
+</body>
+</html>

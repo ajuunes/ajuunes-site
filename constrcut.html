@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Under Construction</title>
+	<style>
+    .container {
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background-color: #ff41c3;
+		color: #c6f717;
+		font-family: 'Arial', sans-serif;
+	}
+	
+	.title {
+		font-size: 3rem;
+		margin-bottom: 2rem;
+	}
+	
+	.flashing-banner {
+		width: 100%;
+		padding: 1rem;
+		background-color: #f00;
+		animation: flashBanner 15s linear infinite;
+	}
+	
+	.flashing-text {
+		font-weight: bold;
+		font-size: 1.5rem;
+		color: #fff;
+		animation: flashText 6s linear infinite;
+	}
+	
+	.scrolling-text {
+		width: 80%;
+		margin-top: 2rem;
+		text-align: center;
+        color: purple;
+		animation: scrollText 20s linear infinite;
+	}
+	
+	@keyframes flashBanner {
+		0%, 50% {
+			background-color: rgb(24, 128, 29);
+		}
+	
+		25%, 75% {
+			background-color: #ff0;
+		}
+	}
+	
+	@keyframes flashText {
+		0%, 50% {
+			color: #e60303;
+		}
+	
+		25%, 75% {
+			color: rgb(152, 35, 139);
+		}
+	}
+	
+	@keyframes scrollText {
+		0% {
+			transform: translateX(0);
+		}
+	
+		100% {
+			transform: translateX(-100%);
+		}
+	}
+
+    #ccccc {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+	</style>
+</head>
+<body>
+	<div class="container">
+        <div>
+            <img id='ccccc' width='30%' src='/img/construct.png' />
+        </div>
+        <h1 class="title">【﻿Ｕｎｄｅｒ　Ｃｏｎｓｔｒｕｃｔｉｏｎ】</h1>
+        <h1 class="title">˜”*°•.˜”*°• Under Construction •°*”˜.•°*”˜</h1>
+		<div class="flashing-banner">
+			<p class="flashing-text">Work in Progress</p>
+		</div>
+		<div class="scrolling-text">
+			<p>This page is currently undergoing renovations. Please bear with us as we curate this experience just for you.</p>
+		</div>
+	</div>
+</body>
+</html>
