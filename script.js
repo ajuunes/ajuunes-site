@@ -10,7 +10,7 @@ const icons = [
   {
     name: "word",
     icon: "assets/apps/word/word_icon2.gif",
-    contentUrl: "assets/apps/word.html"
+    contentUrl: "assets/apps/word_index.html"
   },
 
     {
@@ -31,7 +31,7 @@ const icons = [
         {
     name: "face",
     icon: "assets/apps/face/faces-cover2.jpeg",
-    contentUrl: "assets/apps/face/face.html"
+    contentUrl: "assets/apps/face/face_index.html"
   },
   {
     name: "equipment test",
@@ -46,17 +46,9 @@ const icons = [
     {
     name: "paint.jpegs",
     icon: "assets/apps/paintjpegs/painjpegs_icon.png",
-    contentUrl: "assets/apps/derpycats/derpy_cat_home.html"
+    contentUrl: "assets/apps/derpycats/paintjpeg_index.html"
   },
-  /*
   {
-    name: "Draw With Me!",
-    icon: "assets/face.jpeg",
-    contentUrl: "assets/apps/derpycats/derpy_cat_home.html"
-  },
-  */
-
-        {
     name: "videobeaux",
     icon: "assets/apps/videobeaux/logo.png",
     contentUrl: "https://videobeaux.online"
