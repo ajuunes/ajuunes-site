@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>agamemnon juunes: face</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+
+    :root {
+      --bg: #f4f0e6;
+      --text: #2b2b2b;
+      --accent: #c2a78b;
+      --light-accent: #e0d2c0;
+      --border: #bba89c;
+      --gallery-bg: #f7f4ef;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(to right, var(--accent), #403830);
+      color: #fff;
+      padding: 1.5rem 1rem;
+      font-size: 1.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding-left: 2rem;
+    }
+
+    .wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 40vh;
+    }
+
+    .project-summary {
+      padding: 1.5rem 2rem;
+      background: var(--light-accent);
+      border-right: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .project-summary h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #5a3b2e;
+    }
+
+    .project-summary p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .main-visual {
+      background: #2e2a25;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .main-visual img {
+      max-height: 35vh;
+      max-width: 100%;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .media-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 3rem 2rem;
+      background: var(--gallery-bg);
+    }
+
+    .media-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .media-item:hover {
+      transform: scale(1.01);
+    }
+
+    .media-item video {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      margin-bottom: 0.75rem;
+    }
+
+    .media-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #3e2f26;
+    }
+
+    .media-desc {
+      font-size: 0.9rem;
+      color: #7c6f66;
+    }
+
+    @media (max-width: 800px) {
+      .wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .main-visual img {
+        max-height: 30vh;
+      }
+
+      .project-summary {
+        padding: 1rem 1.5rem;
+      }
+
+      .media-gallery {
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="wrapper">
+    <div class="project-summary">
+      <h2>everyone has a different face.</h2>
+      <p>a gallery of faces—notes in the intricate, silent narrative of our shared human drama.</p>
+    </div>
+    <div class="main-visual">
+      <img src="faces-cover2.jpeg" alt="Primary visual of fragmented face" />
+    </div>
+  </div>
+
+  <section class="media-gallery">
+    <div class="media-item">
+      <video src="faces01.mp4" autoplay loop muted playsinline></video>
+      <div class="media-title">face 01</div>
+      <div class="media-desc">amslal.</div>
+    </div>
+    <div class="media-item">
+      <video src="faces02.mp4" autoplay loop muted playsinline></video>
+      <div class="media-title">face 02</div>
+      <div class="media-desc">amslal.</div>
+    </div>
+    <div class="media-item">
+      <video src="faces05.mp4" autoplay loop muted playsinline></video>
+      <div class="media-title">face 03</div>
+      <div class="media-desc">amslal.</div>
+    </div>
+    <div class="media-item">
+      <video src="faces04.mp4" autoplay loop muted playsinline></video>
+      <div class="media-title">face 04</div>
+      <div class="media-desc">amslal.</div>
+    </div>
+       <div class="media-item">
+      <video src="faces04.mp4" autoplay loop muted playsinline></video>
+      <div class="media-title">face 04</div>
+      <div class="media-desc">amslal.</div>
+    </div>
+       <div class="media-item">
+      <video src="faces04.mp4" autoplay loop muted playsinline></video>
+      <div class="media-title">face 04</div>
+      <div class="media-desc">amslal.</div>
+    </div>
+       <div class="media-item">
+      <video src="faces04.mp4" autoplay loop muted playsinline></video>
+      <div class="media-title">face 04</div>
+      <div class="media-desc">amslal.</div>
+    </div>
+       <div class="media-item">
+      <video src="faces04.mp4" autoplay loop muted playsinline></video>
+      <div class="media-title">face 04</div>
+      <div class="media-desc">amslal.</div>
+    </div>
+       <div class="media-item">
+      <video src="faces04.mp4" autoplay loop muted playsinline></video>
+      <div class="media-title">face 04</div>
+      <div class="media-desc">amslal.</div>
+    </div>
+    <!-- You can add as many videos as needed, it will wrap responsively -->
+  </section>
+  <footer style="font-size: 12px; color: gray;">
+    <hr>
+    <p><span>© 2025 </span></p>
+    <p><span>an agamemnon juunes</span><img src="site.gif" alt="Under construction" width="45"></p>
+  </footer>
+</body>
+</html>
