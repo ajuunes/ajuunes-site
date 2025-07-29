@@ -48,7 +48,7 @@ const icons = [
   },
   {
     name: "videobeaux",
-    icon: "assets/apps/videobeaux/logo.png",
+    icon: "assets/apps/videobeaux/vb_icon.png",
     contentUrl: "https://videobeaux.online"
   },
 
