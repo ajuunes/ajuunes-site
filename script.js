@@ -8,7 +8,7 @@ const icons = [
   {
     name: "word",
     icon: "assets/apps/word/word_icon2.gif",
-    contentUrl: "assets/apps/word_index.html"
+    contentUrl: "assets/apps/word/word_index.html"
   },
 
     {
