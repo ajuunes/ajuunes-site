@@ -1,5 +1,3 @@
-// ICON DATA
-
 const icons = [
   {
     name: "dumb term",
@@ -20,8 +18,8 @@ const icons = [
   },
     {
     name: "derpy cats!",
-    icon: "assets/dcicon.png",
-    contentUrl: "assets/apps/derpycats/derpy_cat_home.html"
+    icon: "assets/apps/derpycats/dcicon.png",
+    contentUrl: "assets/apps/derpycats/derpycats_index.html"
   },
       {
     name: "sound",
@@ -65,22 +63,12 @@ const icons = [
     icon: "assets/apps/cardquestzone/CardQuestZone-banner.gif",
     contentUrl: "https://cardquest.zone"
   },
-
-  /*
-  {
-    name: "Displays",
-    icon: "assets/face.jpeg",
-    contentUrl: "assets/apps/derpycats/derpy_cat_home.html"
-  },
-  */
-
-                {
+{
     name: "Vondas Network",
     icon: "assets/apps/vondas/vondaslogo.png",
     contentUrl: "https://vondas.network"
   },
   
-  // etc...
 ];
 
 const desktop = document.getElementById("desktop-icons");
