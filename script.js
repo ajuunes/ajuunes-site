@@ -38,7 +38,7 @@ const icons = [
   },
   {
     name: "Cooking School FAQ!",
-    icon: "assets/apps/cookingschool/chicken_cover.png",
+    icon: "assets/apps/cookingschool/cooking_icon.png",
     contentUrl: "assets/apps/cookingschool/cooking_index.html"
   },
     {
