@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Terminal</title>
+  <style>
+    body {
+      background: black;
+      color: lime;
+      font-family: monospace;
+      padding: 1rem;
+    }
+    #terminal {
+      white-space: pre-wrap;
+      min-height: 90vh;
+    }
+    .prompt {
+      display: inline;
+    }
+    input {
+      background: black;
+      color: lime;
+      border: none;
+      outline: none;
+      font-family: monospace;
+      width: 90%;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <div class="prompt">
+    <span>$</span>
+    <input type="text" id="input" autofocus />
+  </div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const input = document.getElementById('input');
+    const history = [];
+    let historyIndex = -1;
+
+    const commands = {
+      help: () => 'Available commands: help, echo, clear, about, fortune, schwwaaa, ascii',
+      echo: (args) => args.join(' '),
+      clear: () => { terminal.innerHTML = ''; return ''; },
+      about: () => 'Hi, I\'m [Your Name]. Welcome to my terminal!',
+      fortune: () => `"${['Believe in yourself.', "You've hit your goal...", "Great things are the result of consistent small steps", "Excellent work!"][Math.floor(Math.random() * 3)]}"`,
+      schwwaaa: () => "⚡ go to schwwaaa.net - Let's build tomorrow... today",
+    };
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const value = input.value;
+        history.unshift(value);
+        historyIndex = -1;
+
+        const [cmd, ...args] = value.split(' ');
+        const output = commands[cmd]
+          ? commands[cmd](args)
+          : `Command not found: ${cmd}`;
+
+        terminal.innerHTML += `$ ${value}\n${output}\n`;
+        input.value = '';
+        window.scrollTo(0, document.body.scrollHeight);
+      } else if (e.key === 'ArrowUp') {
+        if (history.length > 0) {
+          historyIndex = Math.min(historyIndex + 1, history.length - 1);
+          input.value = history[historyIndex];
+        }
+      } else if (e.key === 'ArrowDown') {
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = history[historyIndex];
+        } else {
+          input.value = '';
+        }
+      }
+    });
+
+
+    function seededRandom(seed) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < seed.length; i++) {
+    h = Math.imul(h ^ seed.charCodeAt(i), 16777619);
+  }
+  return function() {
+    h += h << 13; h ^= h >>> 7;
+    h += h << 3; h ^= h >>> 17;
+    h += h << 5;
+    return (h >>> 0) / 4294967296;
+  };
+}
+
+commands['ascii'] = ([complexity = 'medium', seed = 'quantum']) => {
+  const sizeMap = { small: 20, medium: 40, large: 80 };
+  const width = sizeMap[complexity.toLowerCase()] || 40;
+  const height = Math.floor(width * 0.5);
+
+  // Seeded random
+  function seededRandom(seed) {
+    let h = 2166136261 >>> 0;
+    for (let i = 0; i < seed.length; i++) {
+      h = Math.imul(h ^ seed.charCodeAt(i), 16777619);
+    }
+    return function () {
+      h += h << 13; h ^= h >>> 7;
+      h += h << 3; h ^= h >>> 17;
+      h += h << 5;
+      return (h >>> 0) / 4294967296;
+    };
+  }
+
+  const rand = seededRandom(seed + Date.now()); // always different
+
+  const grid = Array.from({ length: height }, () => Array(width).fill(' '));
+  const charSet = ['.', ':', '+', '*', '#', '%', '@', '=', '~', 'o'];
+
+  const drawShape = () => {
+    const mode = Math.floor(rand() * 5);
+    const centerX = Math.floor(width / 2);
+    const centerY = Math.floor(height / 2);
+
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        let char = ' ';
+        const dx = x - centerX;
+        const dy = y - centerY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
+        const index = Math.floor(rand() * charSet.length);
+
+        switch (mode) {
+          case 0: // Circle rings
+            if (Math.abs(dist % 4 - 2) < 1.2) char = charSet[index];
+            break;
+          case 1: // Diagonals
+            if ((x + y) % 7 === 0 || (x - y) % 7 === 0) char = charSet[index];
+            break;
+          case 2: // Spiral
+            const theta = Math.atan2(dy, dx);
+            const r = Math.sqrt(dx * dx + dy * dy);
+            if (Math.abs(r - theta * 5) < 1.5) char = charSet[index];
+            break;
+          case 3: // Grid box
+            if ((x % 5 === 0 || y % 3 === 0) && rand() > 0.3) char = charSet[index];
+            break;
+          case 4: // Starburst
+            if (Math.abs(dx) === Math.abs(dy) || x === centerX || y === centerY) {
+              if (rand() > 0.5) char = charSet[index];
+            }
+            break;
+        }
+
+        grid[y][x] = char;
+      }
+    }
+  };
+
+  drawShape();
+  return grid.map(row => row.join('')).join('\n');
+};
+
+
+
+  </script>
+</body>
+</html>
