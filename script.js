@@ -1,8 +1,8 @@
 const icons = [
   {
     name: "dumb term",
-    icon: "assets/termm.png",
-    contentUrl: "assets/apps/terminal.html"
+    icon: "assets/apps/dumbterm/dumbterm_icon.png",
+    contentUrl: "assets/apps/dumbterm/dumbterm_index.html"
   },
 
   {
