@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <!--
+<!--
 
  ______
 |_,.,--\
@@ -11,25 +11,180 @@
    ##             @agamemnonjuunes
 
 -->
-  
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>agamemnon juunes website</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to Schwwaaa!</title>
+  <link rel="stylesheet" href="css/pico.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
-  <video id="bg-video" autoplay muted loop playsinline>
-    <source src="assets/aj_1sec.mov" type="video/mp4">
-  </video>
+  <nav class="container-fluid" style="position: relative;">
+    <ul id='topnav'>
+      <li id="logoli">
+        <img id="logoimg" src='./img/schwwaaa-trans.png' /><br>
+        𝒮𝒽𝒶𝓅𝒾𝓃𝑔 𝓉𝑜𝓂𝑜𝓇𝓇𝑜𝓌 ... 𝓉𝑜𝒹𝒶𝓎<br>
+        塩カ畏 🌈™
+      </li>
+    </ul>
+    <span class="hamburger" onclick="toggleMenu()">☰</span>
+    <ul id="topNavLinks">
+      <li><a href="https://youtube.com/@schwwaaa" target="_blank"><img id='yt-icon' src='img/youtube-icon.png' /></a></li>
+      <li><a href="#aboutus">About</a></li>
+      <li><a href="#presents">Events</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="https://www.etsy.com/shop/schwwaaap" target="_blank">The Schwwaaap</a></li>
+      <li><a href="#signup">Contact</a></li>
+    </ul>
+  </nav>
 
-  <canvas id="dvd-logo"></canvas>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("topNavLinks");
+      menu.classList.toggle("show");
+    }
+  </script>
 
-  <div id="desktop-icons"></div>
-  
-  <div id="windows-container"></div>
+  <marquee id='topMarq' behavior="scroll" direction="left">📡 Schwwaaa and <a href="https://vondas.network" target="_blank">Vondas Software</a> are proud to be a part of <a href="https://www.synthlibraryportland.org/events/video-sync" target="_blank">VideoSync 2025</a> in Portland, OR on Aug 15-17. Come meet VB and the rest of the Schwwaaa family! 📺</marquee>
 
-  <script src="script.js"></script>
+  <div class="container accordion">
+    <details id="videoDetails">
+      <summary id="watchBtn">⏬   📺 <span id="watchBtnText">Watch Live Now</span> 📺   ⏬<br><br><br>
+        <div id="horizline">
+          <img src="./img/line2.gif" />
+        </div>
+        <br>
+      </summary>
+      <div class="tv-bezel">
+        <div class="responsive-video">
+          <iframe id="videoFrame" data-src="https://live.schwwaaa.net/embed/video" allowfullscreen allow="autoplay; encrypted-media" loading="lazy"></iframe>
+          
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <main class="container">
+    <div class="grid aboutus" id="aboutus">
+      <section>
+        <hgroup>
+          <h2>Who We Are</h2>
+          <p>Schwwaaa is a global media production conglomerate founded in 2015 with the goal of bringing people together. We iterate. We create. We serve. We make. Watch our orientation video to find out more about the Schwwaaa Core Ethos.</p>
+        </hgroup>
+        <div class="responsive-video">
+          <iframe id='orientationVidFrame' src="https://www.youtube.com/embed/e7QLoMve8BE?si=dZTg55BbW30Amf48" title="YouTube video player" allowfullscreen></iframe>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <marquee behavior="scroll" direction="left">🤙 Subscribe!!! <a href='https://youtube.com/@schwwaaa'>youtube.com/@schwwaaa</a> 📺</marquee>
+
+  <main class="container">
+    <div id='presents' class="grid">
+      <section>
+        <hgroup>
+            <h2>Schwwaaa Presents</h2>
+            <p>Schwwaaa Presents is a series of special events. Stay tuned - our next event is just around the corner. Sign up for our mailing list for the latest details.</p>
+        </hgroup>
+    
+        <div id="eventDisplay">
+        <img id="defaultImg" src="img/workingonit.png" alt="Placeholder" />
+        </div>
+        <span>Past Events:</span>
+        <table class="events-table">
+        <tr onclick="showEvent('3C6S-6UM5Xk', '🎄 Schwwaaa Corporate Christmas Spectacular - Our annual holiday party!')">
+            <td>🎄 Schwwaaa Corporate Christmas Spectacular</td>
+        </tr>
+        <tr onclick="showEvent('vVYSf90GH5E', 'Valentine\'s Day Heart Health Seminar - ❤️s are top of mind.')">
+            <td>Valentine's Day Heart Health Seminar</td>
+        </tr>
+        <tr onclick="showEvent('xhum7_lTmts', 'All Day USA - Special 2024 election coverage')">
+            <td>All Day USA</td>
+        </tr>
+        <tr onclick="showEvent('4wCcPbMHzVo', 'Richard We Hardly Knew Ye - Honoring Richard Simmons.')">
+            <td>Richard We Hardly Knew Ye</td>
+        </tr>
+        <tr onclick="showEvent('vwxY_rXSUaI', 'A Leap Year Jubilee - With a special guest!')">
+            <td>A Leap Year Jubilee</td>
+        </tr>
+        <tr onclick="showEvent('KiHFQBMxNQU', 'RIP the_garbage_man - A Memorial Vigil.')">
+            <td>RIP the_garbage_man</td>
+        </tr>
+        </table>
+
+  <script>
+    function showEvent(videoId, description) {
+      const display = document.getElementById("eventDisplay");
+      display.innerHTML = `
+        <div class="responsive-video">
+          <iframe src="https://www.youtube-nocookie.com/embed/${videoId}" allowfullscreen></iframe>
+        </div>
+        <p>${description}</p>
+      `;
+    }
+  </script>
+
+      </section>
+    </div>
+</main>
+
+    <main class="container">
+    <div class="grid" id="partners">
+      <section>
+        <hgroup>
+          <h2>Partnerships</h2>
+          <h3>We can't do it without you!</h3>
+        </hgroup>
+        <p>Thank you to all our corporate partners!</p>
+        <ul>
+          <li><a href='https://ajuunes.github.io/vondas-site' target='_blank'>Vondas Software</a> 💠</li>
+          <li><a href='https://ajuunes.github.io/ajuunes-site/error.html' target='_blank'>The Medical Group</a> 💠</li>
+          <li><a href='https://derpycats.net' target='_blank'>DerpyCats</a> 💫</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <section aria-label="Subscribe">
+    <div id='signup' class="container">
+      <article>
+        <hgroup>
+          <h1>Questions? Comments?</h1>
+          <h2>Just want to stay in touch?</h2>
+          <h3>Drop us a note, and sign up for our mailing list to stay updated.</h3>
+        </hgroup>
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSfskOAqaiQxcYu8ZAQlL_XnOftaMdXAV_CHpDjKapP9WqENSQ/formResponse"
+          method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+          <label>Name <input name="entry.789014902" type="text" required></label>
+          <label>Email <input name="entry.2136796510" type="email" required></label>
+          <label>Comment <input name="entry.837356963" type="text"></label>
+          <label><input name="entry.1141659498" type="checkbox"> Sign up for E-Mail Newsletter? 📬</label>
+          <button type="submit" class="cta-btn">Submit</button>
+        </form>
+        <iframe name="hidden_iframe" style="display:none;"></iframe>
+      </article>
+    </div>
+  </section>
+
+  <footer class="container">
+    <small>Copyright 2025 Schwwaaa - all rights reserved.</small>
+  </footer>
+
+  <script>
+    const detailsEl = document.getElementById('videoDetails');
+    const iframeEl = document.getElementById('videoFrame');
+
+    detailsEl.addEventListener('toggle', () => {
+      if (detailsEl.open && !iframeEl.src) {
+        iframeEl.src = iframeEl.getAttribute('data-src');
+      } else if (!detailsEl.open) {
+        iframeEl.src = "";
+      }
+    });
+  </script>
+
 </body>
 </html>
