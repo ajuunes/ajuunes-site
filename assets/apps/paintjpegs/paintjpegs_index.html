@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>paint.jpegs</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Andale Mono, monospace;
+      padding: 10px;
+      text-align: center;
+    }
+    header img {
+      max-width: 75%;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 10px;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+      border: 2px solid #333;
+      transition: transform 0.2s;
+    }
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+    .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      padding: 20px;
+    }
+    .fullscreen img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      cursor: pointer;
+    }
+    .caption {
+      color: #ccc;
+      font-size: 0.9em;
+      margin-top: 10px;
+      text-align: center;
+      max-width: 90%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="paintjpegsfrontimg.png" alt="Gallery Header" />
+  </header>
+
+
+  <div class="gallery">
+    <img src="aj_bc_1.jpg" alt="a strange man" data-caption="">
+    <img src="blockedsnoozed.png" alt="a block notice" data-caption="i got blocked.">
+    <img src="banned4lyfe.png" alt="a statement of fact" data-caption="i was banned but did nothing wrong.">
+    <img src="bothsides.png" alt="a political propaganda poster" data-caption="get both sides of the story at schwwaaa.net">
+    <img src="businesscard.png" alt="a business card" data-caption="hire me">
+    <img src="faceman1.png" alt="a nameless face" data-caption="hire me">
+    <img src="shapes1.png" alt="a series of shapes" data-caption="">
+    <img src="thanks_harrowed.png" alt="a thanks offered" data-caption="tysm">
+    <img src="yellman.png" alt="a yelling man" data-caption="brad">
+    <img src="foundhim.png" alt="a trash can" data-caption="">
+    <img src="murderer.png" alt="a murderer" data-caption="">
+    <img src="noonehasanhidea.png" alt="a true statement" data-caption="">    
+    <img src="ohmywow.png" alt="a jaw agape" data-caption="">
+    <img src="centegg.png" alt="a delicious treat" data-caption="">
+    <img src="gravymeal.png" alt="a delicious meal" data-caption="">
+    <img src="egg2.png" alt="a delicious egg" data-caption="">
+    <img src="digging.png" alt="a dug hole" data-caption="">
+    <img src="thanks.png" alt="a sincere thanks" data-caption="">
+    <img src="ajdumbface.png" alt="a dumb face" data-caption="felt cute might delete later">
+    <img src="takeone.png" alt="a sick kitty" data-caption="new derpy cats! coming soon">
+  </div>
+
+  <div id="popup" class="fullscreen" style="display: none;">
+    <img id="popupImg" src="" alt="Fullscreen Art" />
+    <div id="popupCaption" class="caption"></div>
+  </div>
+
+  <script>
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popupImg');
+    const popupCaption = document.getElementById('popupCaption');
+    const galleryImages = document.querySelectorAll('.gallery img');
+
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        popupImg.src = img.src;
+        popupCaption.textContent = img.dataset.caption || '';
+        popup.style.display = 'flex';
+      });
+    });
+
+    popup.addEventListener('click', () => {
+      popup.style.display = 'none';
+      popupImg.src = '';
+      popupCaption.textContent = '';
+    });
+  </script>
+
+</body>
+</html>
