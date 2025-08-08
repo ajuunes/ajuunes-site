@@ -1,144 +1,148 @@
 body {
-  margin: 0;
-  overflow: hidden;
-  background-color: #001a40;
-  /*font-family: 'Segoe UI', sans-serif;*/
-  font-family: "Gill Sans Extrabold", sans-serif;
-
+	margin: 0;
+	overflow: hidden;
+	background-color: #001a40;
+	font-family: Andale Mono, monospace;
 }
 
 #bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: fill;      
-  z-index: -1;
-  pointer-events: none;
-  background: #000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	object-fit: fill;
+	z-index: -1;
+	pointer-events: none;
+	background: #000;
 }
 
 #bg-gif {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-  pointer-events: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	object-fit: cover;
+	z-index: -1;
+	pointer-events: none;
 }
 
-
 #dvd-logo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 0;
 }
 
 #desktop-icons {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
 }
 
 .icon {
-  position: absolute;
-  width: 80px;
-  text-align: center;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  user-select: none;
+	position: absolute;
+	width: 80px;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+	font-size: 14px;
+	user-select: none;
 }
 
 .icon img {
-  width: 75px;
-  height: 75px;
-  display: block;
-  margin: 0 auto;
-  outline-style: solid;
-  outline-color: rgb(0, 223, 149);
-  margin-bottom: 5px;
+	width: 75px;
+	height: 75px;
+	display: block;
+	margin: 0 auto;
+	outline-style: solid;
+	outline-color: rgb(0, 223, 149);
+	margin-bottom: 5px;
 }
 
 .icon:hover img {
-  filter: invert(100%);
+	filter: invert(100%);
 }
 
 .icon:hover span {
-  filter: invert(100%);
+	filter: invert(100%);
 }
+
 span {
-  text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em green;
+	text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em green;
 }
 
 .window .close-btn {
-  background: #c00;
-  color: white;
-  border: none;
-  padding: 0 6px;
-  cursor: pointer;
+	background: #c00;
+	color: white;
+	border: none;
+	padding: 0 6px;
+	cursor: pointer;
 }
 
-
 .window {
-  position: absolute;
-  background: #eeeeee;
-  border: 2px solid #888;
-  box-shadow: 3px 3px 10px #000;
-  resize: both;
-  overflow: hidden;
-  min-width: 300px;
-  min-height: 200px;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
+	position: absolute;
+	background: #eeeeee;
+	border: 2px solid #888;
+	box-shadow: 3px 3px 10px #000;
+	resize: both;
+	overflow: hidden;
+	min-width: 300px;
+	min-height: 200px;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
 }
 
 .window-header {
-  background: #000080;
-  color: white;
-  padding: 6px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: move;
-  user-select: none;
+	background: #000080;
+	color: white;
+	padding: 6px;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: move;
+	user-select: none;
 }
 
 #extlink:hover {
-  filter: invert(100%);
+	filter: invert(100%);
 }
 
-
 .window-content {
-  width: 100%;
-  height: calc(100% - 30px); /* Adjust if your header is taller */
-  overflow: hidden;
+	width: 100%;
+	height: calc(100% - 30px);
+	/* Adjust if your header is taller */
+	overflow: hidden;
 }
 
 .window-content iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+	width: 100%;
+	height: 100%;
+	border: none;
 }
 
-
-/*
-.window-content {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
+#marquee-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	pointer-events: none;
+	z-index: 3;
 }
 
-.window-content iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+.marquee-text {
+	position: absolute;
+	white-space: nowrap;
+	font-family: Andale Mono, monospace;
+	background-color: rgb(69, 69, 69);
+	font-size: 20px;
+	color: white;
+	text-shadow: 1px 1px 2px rgb(240, 230, 89);
+	transition: transform linear;
+	will-change: transform;
 }
-*/
