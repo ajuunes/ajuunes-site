@@ -8,17 +8,15 @@ const icons = [{
         icon: "assets/apps/dumbterm/dumbterm_icon.png",
         contentUrl: "assets/apps/dumbterm/dumbterm_index.html"
     },
-
     {
         name: "word",
         icon: "assets/apps/word/word_icon2.gif",
         contentUrl: "assets/apps/word/word_index.html"
     },
-
     {
         name: "did u know:",
-        icon: "assets/apps/diduknow/diduknow_icon.png",
-        contentUrl: "assets/apps/diduknow/diduknow_index.html"
+        icon: "assets/apps/diduknow/diduknow_icon2.png",
+        contentUrl: "assets/apps/diduknow/diduknow_index2.html"
     },
     {
         name: "derpy cats!",
@@ -50,13 +48,11 @@ const icons = [{
         icon: "assets/apps/videobeaux/vb_icon.png",
         contentUrl: "https://videobeaux.online"
     },
-
     {
         name: "Schwwaaa",
         icon: "assets/apps/schwwaaa/old_sch_logo.png",
         contentUrl: "https://schwwaaa.net"
     },
-
     {
         name: "CardQuest.Zone",
         icon: "assets/apps/cardquestzone/CardQuestZone-banner.gif",
@@ -67,7 +63,6 @@ const icons = [{
         icon: "assets/apps/vondas/vondaslogo.png",
         contentUrl: "https://vondas.network"
     },
-
 ];
 
 const desktop = document.getElementById("desktop-icons");
@@ -144,7 +139,7 @@ function openWindow(title, contentUrl) {
 
     win.style.position = "fixed";
     win.style.left = "50%";
-    win.style.top = "50%";
+    win.style.top = "42%";
     win.style.transform = "translate(-50%, -50%)";
 
     win.style.width = `${winWidth}px`;
@@ -154,14 +149,14 @@ function openWindow(title, contentUrl) {
         title = `<a id='extlink' href='${contentUrl}' target='_blank' style='color:white;'/>${contentUrl} </a>`
     }
     win.innerHTML = `
-    <div class="window-header">
-      <span>${title}</span>
-      <button class="close-btn">&times;</button>
-    </div>
-    <div class="window-content">
-      <iframe src="${contentUrl}" frameborder="0"></iframe>
-    </div>
-  `;
+      <div class="window-header">
+        <span>${title}</span>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="window-content">
+        <iframe src="${contentUrl}" frameborder="0"></iframe>
+      </div>
+    `;
 
     win.querySelector(".close-btn").onclick = () => {
         win.remove();
@@ -169,7 +164,6 @@ function openWindow(title, contentUrl) {
     };
 
     makeDraggable(win);
-
     windows.appendChild(win);
     currentWindow = win;
 }
