@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>contact me</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Andale Mono, monospace;
+            background-color: #111;
+            color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #5dc800;
+            background-color: #0e1d00;
+        }
+        .description {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #aaa;
+        }
+        .contact-info p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        a {
+            color: #66ccff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .shimmer-hover {
+            position: relative;
+            display: inline-block;
+            font-size: 2.5rem;
+            color: #ffffff;
+            background: linear-gradient( 90deg, #ffffff 0%, #ffd700 20%, #ff69b4 40%, #ffffff 60%, #00ffff 80%, #ffffff 100% );
+            background-size: 300% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            transition: background-position 0.4s ease;
+        }
+        .shimmer-hover:hover {
+            animation: shimmer 1.5s linear infinite;
+        }
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .description, .contact-info p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+  <main class="container">
+    <h1 class="shimmer-hover">agamemnon juunes</h1>
+    <p class="description">a/v art and creative webdev</p>
+    
+    <div class="contact-info">
+      <p><strong>electronic mail::</strong> <a href="mailto:contact@agamemnonjuunes.link">contact@agamemnonjuunes.link</a></p>
+      <p><strong>voice/sms::</strong> <a href="tel:+13342588637">+1 334 AJUUNES (258-8637)</a></p>
+      <p><strong>web/net::</strong> 
+        <a href="https://twitter.com/agamemnonjuunes" target="_blank">x</a> | 
+        <a href="https://instagram.com/agamemnonjuunes" target="_blank">ig</a> |
+        <a href="https://www.youtube.com/@agamemnonjuunes5230" target="_blank">yt</a> |
+        <a href="https://soundcloud.com/agamemnon-juunes" target="_blank">sc</a> |
+        <a href="https://github.com/ajuunes" target="_blank">gh</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector('.container').style.opacity = 0;
+        setTimeout(() => {
+            document.querySelector('.container').style.transition = "opacity 1s ease";
+            document.querySelector('.container').style.opacity = 1;
+        }, 100);
+    });
+  </script>
+</body>
+</html>
