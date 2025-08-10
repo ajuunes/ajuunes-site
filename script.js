@@ -50,7 +50,7 @@ const icons = [{
     },
     {
         name: "Schwwaaa",
-        icon: "assets/apps/schwwaaa/old_sch_logo.png",
+        icon: "assets/apps/schwwaaa/schwwaaa_logo_icon.png",
         contentUrl: "https://schwwaaa.net"
     },
     {
