@@ -275,7 +275,6 @@ function getRandomColor() {
 
 const marqueeMessages = [
     "📧 contact@agamemnonjuunes.linlk 📧",
-    "🎊 Schwwaaa and Vondas LIVE - VideoSync 2025 at LLoyd Center in Portland, OR Aug 15-17!!! 🎊",
     "🐈 all new derpy cats! coming soon! 😾",
 ];
 
