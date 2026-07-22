@@ -13,11 +13,13 @@ const icons = [{
         icon: "assets/apps/word/word_icon2.gif",
         contentUrl: "assets/apps/word/word_index.html"
     },
+    /*
     {
         name: "did u know:",
         icon: "assets/apps/diduknow/diduknow_icon2.png",
         contentUrl: "assets/apps/diduknow/diduknow_index2.html"
     },
+    */
     {
         name: "derpy cats!",
         icon: "assets/apps/derpycats/dcicon.png",
@@ -52,17 +54,20 @@ const icons = [{
         name: "Schwwaaa",
         icon: "assets/apps/schwwaaa/schwwaaa_logo_icon.png",
         contentUrl: "https://schwwaaa.net"
-    },
+    }
+               /*
     {
         name: "CardQuest.Zone",
         icon: "assets/apps/cardquestzone/CardQuestZone-banner.gif",
         contentUrl: "https://cardquest.zone"
     },
+               
     {
         name: "Vondas Network",
         icon: "assets/apps/vondas/vondaslogo.png",
         contentUrl: "https://vondas.network"
     },
+    */
 ];
 
 const desktop = document.getElementById("desktop-icons");
