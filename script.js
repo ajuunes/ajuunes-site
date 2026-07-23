@@ -209,7 +209,7 @@ const ctx = canvas.getContext("2d", {
 });
 
 const logo = new Image();
-logo.src = "assets/face2-t.png";
+logo.src = "assets/maskt.png";
 
 let x = 100,
     y = 100;
