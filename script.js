@@ -209,7 +209,7 @@ const ctx = canvas.getContext("2d", {
 });
 
 const logo = new Image();
-logo.src = "assets/floatingface1.png";
+logo.src = "assets/face2.png";
 
 let x = 100,
     y = 100;
