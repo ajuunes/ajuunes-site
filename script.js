@@ -57,7 +57,7 @@ const icons = [{
     },
     {
         name: "VS10 Video Sampler",
-        icon: "assets/apps/schwwaaa/vs10_icon.png",
+        icon: "assets/apps/vs10/vs10_icon.png",
         contentUrl: "https://schwwaaa.github.io/VideoSampler10_VS10/"
     }
                
