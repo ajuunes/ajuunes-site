@@ -54,7 +54,13 @@ const icons = [{
         name: "Schwwaaa",
         icon: "assets/apps/schwwaaa/schwwaaa_logo_icon.png",
         contentUrl: "https://schwwaaa.net"
+    },
+    {
+        name: "VS10 Video Sampler",
+        icon: "assets/apps/schwwaaa/vs10_icon.png",
+        contentUrl: "https://schwwaaa.github.io/VideoSampler10_VS10/"
     }
+               
                /*
     {
         name: "CardQuest.Zone",
