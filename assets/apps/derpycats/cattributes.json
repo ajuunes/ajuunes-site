@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Pickles",
+    "dob": "2019-06-11",
+    "zodiac": "Gemini",
+    "face": true,
+    "funFact": "Loves sitting in salad bowls and watching Jeopardy reruns.",
+    "image": "/assets/apps/derpycats/img/derpycats_pfps/pickles.png"
+  },
+  {
+    "name": "Snorkel",
+    "dob": "2020-11-03",
+    "zodiac": "Scorpio",
+    "face": false,
+    "funFact": "Once tried to eat a rubber duck. Twice.",
+    "image": "/img/cats/snorkel.png"
+  },
+  {
+    "name": "Zazu",
+    "dob": "2018-01-25",
+    "zodiac": "Aquarius",
+    "face": true,
+    "funFact": "Scared of cucumbers but fearless with vacuum cleaners.",
+    "image": "/img/cats/zazu.png"
+  },
+  {
+    "name": "Muffin",
+    "dob": "2022-07-19",
+    "zodiac": "Cancer",
+    "face": false,
+    "funFact": "Thinks they're invisible when hiding under a towel.",
+    "image": "/img/cats/muffin.png"
+  }
+]
