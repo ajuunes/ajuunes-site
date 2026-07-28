@@ -26,6 +26,11 @@
       width: 90%;
     }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="terminal"></div>
@@ -41,42 +46,113 @@
     let historyIndex = -1;
 
     const commands = {
-      help: () => 'Available commands: help, echo, clear, about, fortune, schwwaaa, ascii',
-      echo: (args) => args.join(' '),
-      clear: () => { terminal.innerHTML = ''; return ''; },
-      about: () => 'Hi, I\'m [Your Name]. Welcome to my terminal!',
-      fortune: () => `"${['Believe in yourself.', "You've hit your goal...", "Great things are the result of consistent small steps", "Excellent work!"][Math.floor(Math.random() * 3)]}"`,
-      schwwaaa: () => "⚡ go to schwwaaa.net - Let's build tomorrow... today",
+     help: () => [
+        'Available commands:',
+        '',
+        'help                  Show this list',
+        'echo <text>           Repeat text',
+        'clear                 Clear terminal',
+        'about                 About this site',
+        'fortune               Random fortune',
+        'schwwaaa              Visit schwwaaa',
+        'ascii [size] [seed]   Generate ASCII art',
+        'morse <message>       Encode and play Morse code',
+        'clock                 Open live clock',
+        'stars                 Open starfield animation',
+        'uuid [count]          Generate UUIDs',
+        'screen                Display screen information',
+        'browser               Display browser information',
+        'cube                  Open rotating ASCII cube',
+        'tree [depth]          Generate procedural tree',
+        'city [width]          Generate city skyline',
+        'maze [width] [height] Generate a maze',
+        'mandelbrot [w] [h]    Render Mandelbrot set',
+        'plasma                Open ASCII plasma animation',
+        'password [length]     Generate secure password',
+        'dice [sides] [count]  Roll dice',
+        'coinflip [count]      Flip coins',
+        'panic                 Trigger fake system panic',
+        'movie <list>          Choose a movie'
+      ].join('\n'),
     };
 
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const value = input.value;
-        history.unshift(value);
-        historyIndex = -1;
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+      const value = input.value.trim();
 
-        const [cmd, ...args] = value.split(' ');
-        const output = commands[cmd]
-          ? commands[cmd](args)
-          : `Command not found: ${cmd}`;
-
-        terminal.innerHTML += `$ ${value}\n${output}\n`;
-        input.value = '';
-        window.scrollTo(0, document.body.scrollHeight);
-      } else if (e.key === 'ArrowUp') {
-        if (history.length > 0) {
-          historyIndex = Math.min(historyIndex + 1, history.length - 1);
-          input.value = history[historyIndex];
-        }
-      } else if (e.key === 'ArrowDown') {
-        if (historyIndex > 0) {
-          historyIndex--;
-          input.value = history[historyIndex];
-        } else {
-          input.value = '';
-        }
+      if (!value) {
+        return;
       }
-    });
+
+      history.unshift(value);
+      historyIndex = -1;
+
+      const parts = value.split(/\s+/);
+      const commandName = parts.shift().toLowerCase();
+      const args = parts;
+
+      appendTerminal(`$ ${value}`);
+
+      try {
+        const command = commands[commandName];
+
+        if (!command) {
+          appendTerminal(`Command not found: ${commandName}`);
+        } else {
+          const output = command(args);
+
+          if (output instanceof Promise) {
+            output
+              .then(result => {
+                if (result !== undefined && result !== '') {
+                  appendTerminal(String(result));
+                }
+              })
+              .catch(error => {
+                appendTerminal(`Error: ${error.message}`);
+              });
+          } else if (output !== undefined && output !== '') {
+            appendTerminal(String(output));
+          }
+        }
+      } catch (error) {
+        appendTerminal(`Error: ${error.message}`);
+        console.error(error);
+      }
+
+      input.value = '';
+
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+
+    else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+
+      if (history.length > 0) {
+        historyIndex = Math.min(
+          historyIndex + 1,
+          history.length - 1
+        );
+
+        input.value = history[historyIndex];
+      }
+    }
+
+    else if (event.key === 'ArrowDown') {
+      event.preventDefault();
+
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = history[historyIndex];
+      } else {
+        historyIndex = -1;
+        input.value = '';
+      }
+    }
+  });
 
 
     function seededRandom(seed) {
@@ -164,5 +240,7 @@ commands['ascii'] = ([complexity = 'medium', seed = 'quantum']) => {
 
 
   </script>
+  <script src="termhelpers.js"></script>
+  
 </body>
 </html>
