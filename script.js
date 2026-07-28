@@ -76,6 +76,9 @@ const icons = [{
     */
 ];
 
+//const floating_logo = "assets/maskt.png";
+const floating_logo = "/assets/apps/derpycats/img/test/hacker.gif"
+
 const desktop = document.getElementById("desktop-icons");
 const windows = document.getElementById("windows-container");
 
@@ -209,13 +212,15 @@ window.addEventListener("keydown", (e) => {
     if (e.key === "c") ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
+
+// Floating logo
 const canvas = document.getElementById("dvd-logo");
 const ctx = canvas.getContext("2d", {
     willReadFrequently: true
 });
 
 const logo = new Image();
-logo.src = "assets/maskt.png";
+logo.src = floating_logo
 
 let x = 100,
     y = 100;
@@ -278,6 +283,8 @@ function draw() {
 }
 
 logo.onload = draw;
+
+//marqueee
 
 function getRandomColor() {
     const hue = Math.floor(Math.random() * 360);
