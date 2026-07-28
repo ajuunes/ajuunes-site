@@ -5,7 +5,7 @@
     "zodiac": "Gemini",
     "face": true,
     "funFact": "Loves sitting in salad bowls and watching Jeopardy reruns.",
-    "image": "/assets/apps/derpycats/img/derpycats_pfps/pickles.png"
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/001.jpg"
   },
   {
     "name": "Snorkel",
@@ -13,22 +13,190 @@
     "zodiac": "Scorpio",
     "face": false,
     "funFact": "Once tried to eat a rubber duck. Twice.",
-    "image": "/img/cats/snorkel.png"
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/002.jpg"
   },
   {
     "name": "Zazu",
     "dob": "2018-01-25",
     "zodiac": "Aquarius",
     "face": true,
-    "funFact": "Scared of cucumbers but fearless with vacuum cleaners.",
-    "image": "/img/cats/zazu.png"
+    "funFact": "Collects bottle caps like priceless treasures.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/003.jpg"
   },
   {
     "name": "Muffin",
     "dob": "2022-07-19",
     "zodiac": "Cancer",
     "face": false,
-    "funFact": "Thinks they're invisible when hiding under a towel.",
-    "image": "/img/cats/muffin.png"
+    "funFact": "Believes every cardboard box is a luxury condo.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/004.jpg"
+  },
+  {
+    "name": "Beans",
+    "dob": "2021-02-14",
+    "zodiac": "Aquarius",
+    "face": true,
+    "funFact": "Sleeps exactly where you're about to sit.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/005.jpg"
+  },
+  {
+    "name": "Bongo",
+    "dob": "2017-08-02",
+    "zodiac": "Leo",
+    "face": false,
+    "funFact": "Can hear a cheese wrapper from three rooms away.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/006.jpg"
+  },
+  {
+    "name": "Noodles",
+    "dob": "2019-12-08",
+    "zodiac": "Sagittarius",
+    "face": true,
+    "funFact": "Insists the bathtub is a meditation chamber.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/007.jpg"
+  },
+  {
+    "name": "Crouton",
+    "dob": "2020-09-27",
+    "zodiac": "Libra",
+    "face": true,
+    "funFact": "Has never lost an argument with a houseplant.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/008.jpg"
+  },
+  {
+    "name": "Waffles",
+    "dob": "2018-03-31",
+    "zodiac": "Aries",
+    "face": false,
+    "funFact": "Runs victory laps after using the litter box.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/009.jpg"
+  },
+  {
+    "name": "Pebbles",
+    "dob": "2021-05-18",
+    "zodiac": "Taurus",
+    "face": true,
+    "funFact": "Purrs louder whenever someone says 'snack.'",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/010.jpg"
+  },
+  {
+    "name": "Gizmo",
+    "dob": "2016-10-10",
+    "zodiac": "Libra",
+    "face": true,
+    "funFact": "Frequently forgets why they entered the room.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/011.jpg"
+  },
+  {
+    "name": "Sprout",
+    "dob": "2023-04-06",
+    "zodiac": "Aries",
+    "face": false,
+    "funFact": "Thinks ceiling fans are mysterious sky fish.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/012.jpg"
+  },
+  {
+    "name": "Biscuit",
+    "dob": "2019-01-17",
+    "zodiac": "Capricorn",
+    "face": true,
+    "funFact": "Makes biscuits on absolutely everyone's backpack.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/013.jpg"
+  },
+  {
+    "name": "Tofu",
+    "dob": "2022-08-30",
+    "zodiac": "Virgo",
+    "face": false,
+    "funFact": "Refuses to acknowledge laser pointers as real.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/014.jpg"
+  },
+  {
+    "name": "Orbit",
+    "dob": "2018-12-22",
+    "zodiac": "Capricorn",
+    "face": true,
+    "funFact": "Has accidentally attended three Zoom meetings.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/015.jpg"
+  },
+  {
+    "name": "Pogo",
+    "dob": "2020-06-29",
+    "zodiac": "Cancer",
+    "face": false,
+    "funFact": "Jumps before remembering what they were chasing.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/016.jpg"
+  },
+  {
+    "name": "Marbles",
+    "dob": "2017-09-12",
+    "zodiac": "Virgo",
+    "face": true,
+    "funFact": "Enjoys dramatic staring contests with squirrels.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/017.jpg"
+  },
+  {
+    "name": "Sprocket",
+    "dob": "2021-11-15",
+    "zodiac": "Scorpio",
+    "face": false,
+    "funFact": "Has never met a shoelace they couldn't defeat.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/018.jpg"
+  },
+  {
+    "name": "Gumbo",
+    "dob": "2019-07-04",
+    "zodiac": "Cancer",
+    "face": true,
+    "funFact": "Secretly judges everyone's interior decorating.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/019.jpg"
+  },
+  {
+    "name": "Pickax",
+    "dob": "2018-05-23",
+    "zodiac": "Gemini",
+    "face": false,
+    "funFact": "Has fallen off the couch over fifty confirmed times.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/020.jpg"
+  },
+  {
+    "name": "Mochi",
+    "dob": "2022-02-02",
+    "zodiac": "Aquarius",
+    "face": true,
+    "funFact": "Can nap through thunderstorms but not snack bags.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/021.jpg"
+  },
+  {
+    "name": "Tater",
+    "dob": "2017-11-28",
+    "zodiac": "Sagittarius",
+    "face": false,
+    "funFact": "Occasionally forgets how doors work.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/022.jpg"
+  },
+  {
+    "name": "Widget",
+    "dob": "2020-03-16",
+    "zodiac": "Pisces",
+    "face": true,
+    "funFact": "Has a personal rivalry with the mail carrier.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/023.jpg"
+  },
+  {
+    "name": "Picklebean",
+    "dob": "2021-09-09",
+    "zodiac": "Virgo",
+    "face": true,
+    "funFact": "Always arrives five minutes late to absolutely nothing.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/024.jpg"
+  },
+  {
+    "name": "Booper",
+    "dob": "2018-04-20",
+    "zodiac": "Taurus",
+    "face": false,
+    "funFact": "Firmly believes printer paper is a gourmet meal.",
+    "image": "/assets/apps/derpycats/img/derpycat_pfps/025.jpg"
   }
 ]
