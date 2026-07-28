@@ -109,7 +109,7 @@
 
 
 
-  <marquee><h4><img src="/assets/apps/derpycats/img/test/new.gif">&nbsp;all new derpy cats! are coming soon! ⊂(◉‿◉)つ launch info during the <a href='http://discord.gg/eBHpwv9yGWtombheads' target="'_blak"> tombheads auction </a> on sat nov 5!</h4></marquee>
+  <marquee><h4><img src="/assets/apps/derpycats/img/test/new.gif">&nbsp;all new derpy cats! are coming soon! ⊂(◉‿◉)つ launch info during the <a href="https://discord.gg/eBHpwv9yGWtombheads" target="'_blak"> tombheads auction </a> on sat nov 5!</h4></marquee>
  
 
   <div class="row">
@@ -190,38 +190,221 @@
 
 
 
+  <style>
+  #cat-gallery.derpy-gallery {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  #cat-gallery .cat-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 10px;
+    border: 2px solid #000;
+    background: #fff;
+  }
+
+  #cat-gallery .cat-filters h3 {
+    width: 100%;
+    margin: 0 0 4px;
+  }
+
+  #cat-gallery .cat-filters label {
+    margin: 0;
+    font-weight: bold;
+  }
+
+  #cat-gallery .cat-filters select,
+  #cat-gallery .cat-filters button {
+    margin: 0;
+  }
+
+  #cat-gallery .cat-count {
+    margin-left: auto;
+    font-weight: bold;
+  }
+
+  #cat-gallery .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+    gap: 10px;
+  }
+
+  #cat-gallery .cat-thumb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    padding: 7px;
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  #cat-gallery .cat-thumb:hover,
+  #cat-gallery .cat-thumb:focus {
+    background: #ffff99;
+    outline: 3px solid #ff00ff;
+  }
+
+  #cat-gallery .cat-thumb img {
+    display: block;
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 6px;
+  }
+
+  #cat-gallery .cat-thumb-name {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  #cat-gallery .cat-thumb-zodiac {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  #cat-gallery .cat-empty {
+    grid-column: 1 / -1;
+    padding: 20px;
+    border: 2px dashed #000;
+    text-align: center;
+    background: #fff;
+  }
+
+  #catModal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.82);
+    box-sizing: border-box;
+    overflow: auto;
+  }
+
+  #catModal.is-open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #catModal .cat-modal-card {
+    position: relative;
+    width: min(92vw, 520px);
+    max-height: calc(100vh - 36px);
+    overflow: auto;
+    padding: 14px;
+    border: 4px solid #ff00ff;
+    background: #fff;
+    color: #000;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  #catModal .cat-modal-close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  #catModal #catImage {
+    display: block;
+    max-width: 100%;
+    max-height: 52vh;
+    margin: 0 auto 10px;
+    object-fit: contain;
+  }
+
+  #catModal .cat-modal-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  #catModal .cat-modal-nav button {
+    flex: 1;
+  }
+
+  @media (max-width: 480px) {
+    #cat-gallery .cat-filters {
+      align-items: stretch;
+    }
+
+    #cat-gallery .cat-filters label,
+    #cat-gallery .cat-filters select,
+    #cat-gallery .cat-filters button,
+    #cat-gallery .cat-count {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    #cat-gallery .cat-count {
+      margin-left: 0;
+    }
+
+    #cat-gallery .cat-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  </style>
+
   <div id="cat-gallery" class="derpy-gallery">
-    <div class="cat-display">
-      <button id="prevCat">←</button>
-      <div id="catCard" class="cat-card">
-        <img id="catImage" src="" alt="cat pic">
-        <h2 id="catName"></h2>
-        <p><strong>DOB:</strong> <span id="catDob"></span></p>
-        <p><strong>Zodiac:</strong> <span id="catZodiac"></span></p>
-        <p><strong>Fun Fact:</strong> <span id="catFact"></span></p>
-      </div>
-      <button id="nextCat">→</button>
-    </div>
-  
     <div class="cat-filters">
       <h3>Find Your Derpy Soulmate 💖</h3>
-      <label>Name: <input type="text" id="filterName" placeholder="Type a name..."></label>
-      <label>Face?: 
+      <label>Face?:
         <select id="filterFace">
-          <option value="">Any</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
+          <option value="">Any face</option>
+          <option value="true">Has a face</option>
+          <option value="false">No face</option>
         </select>
       </label>
-      <label>Zodiac: 
+      <label>Zodiac:
         <select id="filterZodiac">
-          <option value="">Any</option>
+          <option value="">Any zodiac</option>
           <option>Aries</option><option>Taurus</option><option>Gemini</option>
           <option>Cancer</option><option>Leo</option><option>Virgo</option>
           <option>Libra</option><option>Scorpio</option><option>Sagittarius</option>
           <option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
         </select>
       </label>
+      <button type="button" id="clearCatFilters">Clear filters</button>
+      <span id="catCount" class="cat-count" aria-live="polite"></span>
+    </div>
+
+    <div id="catGrid" class="cat-grid" aria-live="polite"></div>
+  </div>
+
+  <div id="catModal" role="dialog" aria-modal="true" aria-labelledby="catName" aria-hidden="true">
+    <div class="cat-modal-card">
+      <button type="button" id="closeCatModal" class="cat-modal-close" aria-label="Close cat details">×</button>
+      <img id="catImage" src="" alt="cat pic">
+      <h2 id="catName"></h2>
+      <p><strong>DOB:</strong> <span id="catDob"></span></p>
+      <p><strong>Zodiac:</strong> <span id="catZodiac"></span></p>
+      <p><strong>Face?:</strong> <span id="catFace"></span></p>
+      <p><strong>Fun Fact:</strong> <span id="catFact"></span></p>
+      <div class="cat-modal-nav">
+        <button type="button" id="prevCat">← Previous</button>
+        <button type="button" id="nextCat">Next →</button>
+      </div>
     </div>
   </div>
   
@@ -236,49 +419,123 @@
     .then(data => {
       allCats = data;
       filteredCats = [...allCats];
-      displayCat(0);
+      renderCatGrid();
+    })
+    .catch(() => {
+      document.getElementById('catGrid').innerHTML = '<p class="cat-empty">The derpy cats could not be loaded right now 😿</p>';
     });
-  
-  function displayCat(index) {
+
+  function renderCatGrid() {
+    const grid = document.getElementById('catGrid');
+    const count = document.getElementById('catCount');
+
+    count.textContent = `Showing ${filteredCats.length} of ${allCats.length} derpy cats`;
+    grid.innerHTML = '';
+
     if (!filteredCats.length) {
-      document.getElementById('catCard').innerHTML = "<p>No derpy cats match your filters 😿</p>";
+      grid.innerHTML = '<p class="cat-empty">No derpy cats match your filters 😿</p>';
       return;
     }
-    const cat = filteredCats[index];
+
+    filteredCats.forEach((cat, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'cat-thumb';
+      button.setAttribute('aria-label', `View details for ${cat.name}`);
+
+      const image = document.createElement('img');
+      image.src = cat.image;
+      image.alt = cat.name;
+      image.loading = 'lazy';
+
+      const name = document.createElement('span');
+      name.className = 'cat-thumb-name';
+      name.textContent = cat.name;
+
+      const zodiac = document.createElement('span');
+      zodiac.className = 'cat-thumb-zodiac';
+      zodiac.textContent = cat.zodiac;
+
+      button.appendChild(image);
+      button.appendChild(name);
+      button.appendChild(zodiac);
+      button.addEventListener('click', () => openCat(index));
+      grid.appendChild(button);
+    });
+  }
+  
+  function displayCat(index) {
+    if (!filteredCats.length) return;
+
+    currentIndex = (index + filteredCats.length) % filteredCats.length;
+    const cat = filteredCats[currentIndex];
     document.getElementById('catImage').src = cat.image;
+    document.getElementById('catImage').alt = cat.name;
     document.getElementById('catName').textContent = cat.name;
     document.getElementById('catDob').textContent = cat.dob;
     document.getElementById('catZodiac').textContent = cat.zodiac;
+    document.getElementById('catFace').textContent = cat.face ? 'Yes' : 'No';
     document.getElementById('catFact').textContent = cat.funFact;
+  }
+
+  function openCat(index) {
+    displayCat(index);
+    const modal = document.getElementById('catModal');
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.getElementById('closeCatModal').focus();
+  }
+
+  function closeCat() {
+    const modal = document.getElementById('catModal');
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
   }
   
   document.getElementById('prevCat').onclick = () => {
-    currentIndex = (currentIndex - 1 + filteredCats.length) % filteredCats.length;
-    displayCat(currentIndex);
+    displayCat(currentIndex - 1);
   };
   
   document.getElementById('nextCat').onclick = () => {
-    currentIndex = (currentIndex + 1) % filteredCats.length;
-    displayCat(currentIndex);
+    displayCat(currentIndex + 1);
   };
+
+  document.getElementById('closeCatModal').onclick = closeCat;
+
+  document.getElementById('catModal').addEventListener('click', event => {
+    if (event.target.id === 'catModal') closeCat();
+  });
+
+  document.addEventListener('keydown', event => {
+    const modal = document.getElementById('catModal');
+    if (!modal.classList.contains('is-open')) return;
+
+    if (event.key === 'Escape') closeCat();
+    if (event.key === 'ArrowLeft') displayCat(currentIndex - 1);
+    if (event.key === 'ArrowRight') displayCat(currentIndex + 1);
+  });
   
   function filterCats() {
-    const nameFilter = document.getElementById('filterName').value.toLowerCase();
     const faceFilter = document.getElementById('filterFace').value;
     const zodiacFilter = document.getElementById('filterZodiac').value;
   
     filteredCats = allCats.filter(cat => {
-      const matchesName = cat.name.toLowerCase().includes(nameFilter);
-      const matchesFace = faceFilter === "" || String(cat.face) === faceFilter;
-      const matchesZodiac = zodiacFilter === "" || cat.zodiac === zodiacFilter;
-      return matchesName && matchesFace && matchesZodiac;
+      const matchesFace = faceFilter === '' || String(cat.face) === faceFilter;
+      const matchesZodiac = zodiacFilter === '' || cat.zodiac === zodiacFilter;
+      return matchesFace && matchesZodiac;
     });
   
     currentIndex = 0;
-    displayCat(currentIndex);
+    closeCat();
+    renderCatGrid();
   }
+
+  document.getElementById('clearCatFilters').onclick = () => {
+    document.getElementById('filterFace').value = '';
+    document.getElementById('filterZodiac').value = '';
+    filterCats();
+  };
   
-  document.getElementById('filterName').addEventListener('input', filterCats);
   document.getElementById('filterFace').addEventListener('change', filterCats);
   document.getElementById('filterZodiac').addEventListener('change', filterCats);
   </script>
