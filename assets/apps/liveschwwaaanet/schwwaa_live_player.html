@@ -33,7 +33,7 @@
       <button onclick="startStream()">OK</button>
     </div>
   </div>
-  <div class="player-container" style="margin: 0 auto; position: relative;">
+  <div class="player-container">
     <div class="title-bar">
       <span>schwwaaa Live Online Media Player</span>
     </div>
@@ -536,23 +536,27 @@
     });
 
     // Iframe Compatibility
-    window.addEventListener('resize', () => {
+    function resizePlayerElements() {
       videoElement.style.width = '100%';
       videoElement.style.height = '100%';
       waveform.width = waveform.parentElement.clientWidth;
+      waveform.height = window.matchMedia('(max-width: 600px)').matches ? 42 : 60;
       lowpass.width = lowpass.parentElement.clientWidth;
+      lowpass.height = window.matchMedia('(max-width: 600px)').matches ? 30 : 40;
       paintCanvas.width = videoElement.clientWidth;
       paintCanvas.height = videoElement.clientHeight;
       const ctx = paintCanvas.getContext('2d');
       ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height); // Clear on resize to prevent distortion
-    });
+      drawLowpassSlider();
+    }
+
+    window.addEventListener('resize', resizePlayerElements);
+
+    const playerResizeObserver = new ResizeObserver(resizePlayerElements);
+    playerResizeObserver.observe(document.querySelector('.player-container'));
 
     // Initialize canvas size
-    waveform.width = waveform.parentElement.clientWidth;
-    waveform.height = 60;
-    lowpass.width = lowpass.parentElement.clientWidth;
-    lowpass.height = window.innerWidth <= 600 ? 30 : 40;
-    drawLowpassSlider();
+    resizePlayerElements();
 
     function postHeight() {
     const height = document.querySelector('.player-container').offsetHeight;
