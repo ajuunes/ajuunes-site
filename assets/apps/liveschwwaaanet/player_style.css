@@ -414,92 +414,10 @@ html, body {
      font-size: 14px;
      box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
- @media (max-width: 600px) {
-     .player-container {
-         width: 95vw;
-    }
-     .video-container {
-         max-height: 40vh;
-    }
-     .controls {
-         flex-direction: column;
-         align-items: stretch;
-         gap: 10px;
-         padding: 8px;
-    }
-     .controls .control-group {
-         flex-direction: column;
-         align-items: stretch;
-    }
-     .controls input[type="range"] {
-         width: 100%;
-    }
-     .controls button {
-         width: 100%;
-         padding: 8px;
-    }
-     .paint-tools {
-         flex-direction: column;
-         align-items: stretch;
-    }
-     .paint-tools input[type="color"] {
-         width: 100%;
-         height: 30px;
-    }
-     .paint-tools input[type="range"] {
-         width: 100%;
-    }
-     .paint-tools select {
-         width: 100%;
-         padding: 8px;
-    }
-     .paint-tools button {
-         width: 100%;
-         padding: 8px;
-    }
-     .advanced-settings {
-         width: 100%;
-         transform: translateY(100%);
-         top: auto;
-         bottom: 0;
-         height: 60%;
-    }
-     .advanced-settings.open {
-         transform: translateY(0);
-    }
-     .advanced-settings canvas#lowpass {
-         height: 30px;
-    }
-     .popup-content {
-         width: 90%;
-    }
-}
- @media (orientation: landscape) and (max-width: 900px) {
-     .player-container {
-         width: 100vw;
-         max-width: none;
-    }
-     .video-container {
-         max-height: 50vh;
-    }
-     .advanced-settings {
-         height: 100%;
-         width: 40%;
-         transform: translateX(100%);
-    }
-     .advanced-settings.open {
-         transform: translateX(0);
-    }
-}
- .vjs-control-bar {
-     display: none !important;
-}
- .vjs-loading-spinner {
-     z-index: 3;
-}
 
 /* =========================================================
-   Embedded-window sizing and responsive overrides
+   Embedded-window layout
+   The iframe viewport is the player's complete available area.
    ========================================================= */
 
 *,
@@ -514,6 +432,8 @@ body {
     height: 100%;
     min-width: 0;
     min-height: 0;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
 }
 
@@ -523,22 +443,23 @@ body {
 
 .player-container {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    align-items: stretch;
     width: 100%;
-    max-width: 100%;
     height: 100%;
-    max-height: 100%;
     min-width: 0;
     min-height: 0;
     overflow: hidden;
+    background: transparent;
 }
 
+/* Every fixed-height row spans the full iframe width. */
 .title-bar,
 .controls,
 .paint-tools,
 .container {
-    flex: 0 0 auto;
+    width: 100%;
     min-width: 0;
 }
 
@@ -553,23 +474,55 @@ body {
     white-space: nowrap;
 }
 
+/*
+ * This is the flexible viewport. It receives only the space left after
+ * the title, controls and waveform. The media is never allowed to enlarge it.
+ */
 .video-container {
-    flex: 1 1 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 2;
     width: 100%;
+    height: 100%;
     min-width: 0;
     min-height: 0;
-    aspect-ratio: auto;
+    overflow: hidden;
+    background: #000;
 }
 
+/* Disable Video.js's fluid padding box and fit the complete image in view. */
 .video-js,
-.video-js video,
-.vjs-tech {
+.video-js.vjs-fluid,
+.video-js.vjs-16-9,
+.video-js.vjs-4-3 {
+    position: absolute !important;
+    inset: 0;
     width: 100% !important;
     height: 100% !important;
-    object-fit: contain;
+    padding-top: 0 !important;
 }
 
+.video-js .vjs-tech,
+.video-js video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center;
+    background: #000;
+}
+
+#paintCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Controls remain one compact row instead of stealing video height. */
 .controls {
+    grid-row: 3;
     flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
@@ -582,26 +535,42 @@ body {
     flex: 0 0 auto;
 }
 
-.paint-tools.active {
-    flex-wrap: wrap;
-    max-height: 42%;
-    overflow-y: auto;
-}
-
 .container {
-    width: 100%;
+    grid-row: 4;
     min-height: 0;
     overflow: hidden;
 }
 
 #waveform {
     display: block;
+    width: 100%;
     max-width: 100%;
+}
+
+/*
+ * Paint tools overlay the player rather than inserting another tall layout row.
+ * This prevents opening Paint from shrinking the video to almost nothing.
+ */
+.paint-tools {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: var(--waveform-height, 62px);
+    z-index: 10;
+    max-height: 42%;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.paint-tools.active {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .advanced-settings {
     max-width: 100%;
     max-height: 100%;
+    z-index: 20;
 }
 
 .popup {
@@ -615,18 +584,19 @@ body {
     overflow-y: auto;
 }
 
-@media (max-width: 600px) {
-    .player-container {
-        width: 100%;
-    }
+.vjs-control-bar {
+    display: none !important;
+}
 
+.vjs-loading-spinner {
+    z-index: 3;
+}
+
+/* Tablet and narrow iframe */
+@media (max-width: 600px) {
     .title-bar {
         padding: 4px 8px;
         font-size: 12px;
-    }
-
-    .video-container {
-        max-height: none;
     }
 
     .controls {
@@ -651,12 +621,11 @@ body {
         padding: 6px 8px;
     }
 
-    .paint-tools.active {
-        flex-direction: row;
-        align-items: center;
+    .paint-tools {
+        bottom: 44px;
         gap: 6px;
         padding: 6px;
-        max-height: 50%;
+        max-height: 55%;
     }
 
     .paint-tools .control-group {
@@ -682,9 +651,19 @@ body {
     }
 
     .advanced-settings {
+        top: auto;
+        bottom: 0;
         width: 100%;
         height: min(68%, 520px);
-        max-height: 100%;
+        transform: translateY(100%);
+    }
+
+    .advanced-settings.open {
+        transform: translateY(0);
+    }
+
+    .advanced-settings canvas#lowpass {
+        height: 30px;
     }
 
     #waveform {
@@ -692,22 +671,23 @@ body {
     }
 }
 
+/* Phones and small tablets held sideways */
 @media (orientation: landscape) and (max-width: 900px) {
-    .player-container {
-        width: 100%;
-    }
-
-    .video-container {
-        max-height: none;
-    }
-
     .advanced-settings {
+        top: 0;
+        right: 0;
+        bottom: auto;
         width: min(44%, 320px);
         height: 100%;
-        max-height: 100%;
+        transform: translateX(100%);
+    }
+
+    .advanced-settings.open {
+        transform: translateX(0);
     }
 }
 
+/* Very short parent windows */
 @media (max-height: 520px) {
     .title-bar {
         padding-top: 3px;
@@ -720,10 +700,11 @@ body {
     }
 
     #waveform {
-        height: 36px;
+        height: 34px;
     }
 
-    .paint-tools.active {
-        max-height: 55%;
+    .paint-tools {
+        bottom: 36px;
+        max-height: 60%;
     }
 }
