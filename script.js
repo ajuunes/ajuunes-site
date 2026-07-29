@@ -13,6 +13,11 @@ const icons = [{
         icon: "assets/apps/word/word_icon2.gif",
         contentUrl: "assets/apps/word/word_index.html"
     },
+    {
+        name: "live.schwwaaa.net",
+        icon: "assets/apps/liveschwwaaanet/live_icon.png",
+        contentUrl: "assets/apps/liveschwwaaanet/schwwaaa-live-player.html"
+    },
     /*
     {
         name: "did u know:",
