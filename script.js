@@ -159,13 +159,13 @@ function openWindow(title, contentUrl) {
     //win.style.height = `${winHeight}px`;
         
     const winWidth = 90; 
-    const winHeight = 90; 
+    const winHeight = 85; 
     win.style.width = `${winWidth}%`;
     win.style.height = `${winHeight}%`;
         
     win.style.position = "fixed";
     win.style.left = "50%";
-    win.style.top = "42%";
+    win.style.top = "50%";
     win.style.transform = "translate(-50%, -50%)";
 
 
