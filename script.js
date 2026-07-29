@@ -153,16 +153,25 @@ function openWindow(title, contentUrl) {
     const win = document.createElement("div");
     win.className = "window";
 
-    const winWidth = Math.min(window.innerWidth * 0.9, 1100); // max 1100px or 90% of screen
-    const winHeight = Math.min(window.innerHeight * 0.8, 700); // max 700px or 80% of screen
-
+    //const winWidth = Math.min(window.innerWidth * 0.9, 1100); // max 1100px or 90% of screen
+    //const winHeight = Math.min(window.innerHeight * 0.8, 700); // max 700px or 80% of screen
+    //win.style.width = `${winWidth}px`;
+    //win.style.height = `${winHeight}px`;
+        
+    const winWidth = 90; 
+    const winHeight = 90; 
+    win.style.width = `${winWidth}%`;
+    win.style.height = `${winHeight}%`;
+        
     win.style.position = "fixed";
     win.style.left = "50%";
     win.style.top = "42%";
     win.style.transform = "translate(-50%, -50%)";
 
-    win.style.width = `${winWidth}px`;
-    win.style.height = `${winHeight}px`;
+
+
+
+
 
     if (contentUrl.includes('https://')) {
         title = `<a id='extlink' href='${contentUrl}' target='_blank' style='color:white;'/>${contentUrl} </a>`
