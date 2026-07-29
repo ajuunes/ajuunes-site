@@ -106,7 +106,7 @@
     // Initialize DOM elements
     const videoElement = document.getElementById('video');
     const video = videojs(videoElement, {
-      fluid: true,
+      fluid: false,
       controls: false
     });
     const volume = document.getElementById('volume');
@@ -274,11 +274,10 @@
       paintBtn.classList.toggle('active');
       paintCanvas.classList.toggle('active');
       if (paintTools.classList.contains('active')) {
-        initPaintCanvas();
-      } else {
         settings.classList.remove('open');
         settingsBtn.classList.remove('active');
       }
+      requestAnimationFrame(resizePlayerElements);
     }
     function getCanvasCoords(e) {
       const rect = paintCanvas.getBoundingClientRect();
@@ -366,6 +365,7 @@
       paintTools.classList.remove('active');
       paintBtn.classList.remove('active');
       paintCanvas.classList.remove('active');
+      requestAnimationFrame(resizePlayerElements);
     });
 
     // Start Stream
@@ -389,7 +389,7 @@
       video.on('loadedmetadata', () => {
         console.log('Metadata loaded');
         logVisibility();
-        initPaintCanvas();
+        resizePlayerElements();
       });
       video.on('loadeddata', () => {
         console.log('Data loaded, video should start soon');
@@ -522,12 +522,14 @@
         paintBtn.classList.remove('active');
         paintCanvas.classList.remove('active');
       }
+      requestAnimationFrame(resizePlayerElements);
     }
 
     const closeSettings = document.getElementById('closeSettings');
     closeSettings.addEventListener('click', () => {
       settings.classList.remove('open');
       settingsBtn.classList.remove('active');
+      requestAnimationFrame(resizePlayerElements);
     });
 
     // Touch Support for Mobile
@@ -535,90 +537,44 @@
       e.stopPropagation();
     });
 
-    // Iframe Compatibility
+    // Iframe compatibility and responsive canvas sizing
+    let resizeFrame = null;
+
     function resizePlayerElements() {
-      videoElement.style.width = '100%';
-      videoElement.style.height = '100%';
-      waveform.width = waveform.parentElement.clientWidth;
-      waveform.height = window.matchMedia('(max-width: 600px)').matches ? 42 : 60;
-      lowpass.width = lowpass.parentElement.clientWidth;
-      lowpass.height = window.matchMedia('(max-width: 600px)').matches ? 30 : 40;
-      paintCanvas.width = videoElement.clientWidth;
-      paintCanvas.height = videoElement.clientHeight;
-      const ctx = paintCanvas.getContext('2d');
-      ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height); // Clear on resize to prevent distortion
-      drawLowpassSlider();
+      if (resizeFrame) {
+        cancelAnimationFrame(resizeFrame);
+      }
+
+      resizeFrame = requestAnimationFrame(() => {
+        const videoContainer = document.querySelector('.video-container');
+        const mobile = window.matchMedia('(max-width: 600px)').matches;
+        const shortViewport = window.matchMedia('(max-height: 520px)').matches;
+
+        const waveformHeight = shortViewport ? 34 : (mobile ? 42 : 60);
+        waveform.width = Math.max(1, waveform.parentElement.clientWidth);
+        waveform.height = waveformHeight;
+
+        lowpass.width = Math.max(1, lowpass.parentElement.clientWidth);
+        lowpass.height = mobile ? 30 : 40;
+
+        // Match the paint canvas to the visible video area.
+        paintCanvas.width = Math.max(1, videoContainer.clientWidth);
+        paintCanvas.height = Math.max(1, videoContainer.clientHeight);
+
+        drawLowpassSlider();
+        resizeFrame = null;
+      });
     }
 
-
-
-
-
-
-
-function fitVideo() {
-    const player = document.querySelector('.player-container');
-    const videoContainer = document.querySelector('.video-container');
-
-    const titleBar = document.querySelector('.title-bar');
-    const controls = document.querySelector('.controls');
-    const waveform = document.querySelector('.container');
-    const paintTools = document.querySelector('.paint-tools');
-
-    const availableWidth = player.clientWidth;
-
-    let availableHeight = player.clientHeight;
-
-    if (titleBar) availableHeight -= titleBar.offsetHeight;
-    if (controls) availableHeight -= controls.offsetHeight;
-    if (waveform) availableHeight -= waveform.offsetHeight;
-
-    // Only subtract paint tools if visible
-    if (paintTools && paintTools.classList.contains('active')) {
-        availableHeight -= paintTools.offsetHeight;
-    }
-
-    // Largest 16:9 rectangle that fits
-    const widthFromHeight = availableHeight * (16 / 9);
-
-    let width, height;
-
-    if (widthFromHeight <= availableWidth) {
-        width = widthFromHeight;
-        height = availableHeight;
-    } else {
-        width = availableWidth;
-        height = width * (9 / 16);
-    }
-
-    videoContainer.style.width = `${width}px`;
-    videoContainer.style.height = `${height}px`;
-}
-
-
-
-
-
-
-
-
-
-   
     window.addEventListener('resize', resizePlayerElements);
+    window.addEventListener('orientationchange', resizePlayerElements);
+    window.addEventListener('load', resizePlayerElements);
 
     const playerResizeObserver = new ResizeObserver(resizePlayerElements);
     playerResizeObserver.observe(document.querySelector('.player-container'));
+    playerResizeObserver.observe(document.querySelector('.video-container'));
 
-    // Initialize canvas size
     resizePlayerElements();
-
-    function postHeight() {
-    const height = document.querySelector('.player-container').offsetHeight;
-    parent.postMessage({ type: 'resizeIframe', height: height + 40 }, '*');
-    }
-
-    window.addEventListener('load', postHeight);
-    window.addEventListener('resize', postHeight);
   </script>
 </body>
 </html>
