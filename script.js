@@ -320,7 +320,7 @@ const marqueeMessages = [
     "📧 contact@agamemnonjuunes.linlk 📧",
     "🐈 all new derpy cats! coming soon! 😾",
     "🔜 all new Cooking School FAQ is in the works - Soups On!🍲",
-    "🖼️ come visit me and schwwaaa in minneapolis, mn at VideoSync 2026 sept 26-27 - more at videosync.xyz/",
+    "🖼️ come visit me and schwwaaa in minneapolis, mn at VideoSync 2026 sept 26-27 - more at videosync.xyz",
     "🌐 dumbterm - the web terminal you didn't know you needed! 💻",
     "📺 Videobeaux - it's your best friend! Now with a GUI! 📺",
     "⏯️ The VideoSampler10 is now opertional! ✅",
