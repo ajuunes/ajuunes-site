@@ -1,0 +1,475 @@
+html, body {
+     margin: 0;
+     padding: 0;
+     background: #419f88 url("../img/diagonal-waves.png") repeat;
+     overflow: hidden;
+}
+/*body {
+     margin: 0;
+     background: #1a1a1a;
+     font-family: 'Arial', sans-serif;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     color: #fff;
+     overflow: auto;
+}
+ */
+ .player-container {
+     margin: 0;
+     width: 100vw;
+     max-width: none;
+     border: none;
+     box-shadow: none;
+     background: transparent;
+}
+ .title-bar {
+     background: linear-gradient(to right, #0a2463, #4682b4);
+     padding: 5px 10px;
+     font-family: 'Courier New', monospace;
+     font-size: 14px;
+     color: #fff;
+     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+ .title-bar button, .popup button {
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     border-top-color: #ddd;
+     border-left-color: #ddd;
+     padding: 2px 8px;
+     cursor: pointer;
+     font-family: 'Courier New', monospace;
+     font-size: 12px;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+}
+ .title-bar button:hover, .popup button:hover {
+     background: linear-gradient(to bottom, #ddd, #aaa);
+}
+ .title-bar button.active {
+     background: linear-gradient(to bottom, #ffcc00, #cc9900);
+     box-shadow: inset 0 0 2px #666;
+}
+ .video-container {
+     position: relative;
+     background: #000;
+     width: 100%;
+     aspect-ratio: 16 / 9;
+     overflow: hidden;
+}
+ .video-js {
+     width: 100%;
+     height: 100%;
+     position: absolute;
+     top: 0;
+     left: 0;
+     z-index: 1;
+     display: block !important;
+}
+ #paintCanvas {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 2;
+     display: none;
+}
+ #paintCanvas.active {
+     display: block;
+}
+ .vjs-poster {
+     display: none !important;
+}
+ #waveform {
+     width: 100%;
+     height: 60px;
+     background: #222;
+     border-top: 1px solid #666;
+     border-bottom: 1px solid #666;
+}
+ .controls {
+     background: #333;
+     padding: 10px;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 8px;
+     align-items: center;
+     justify-content: center;
+     border-top: 1px solid #666;
+}
+ .controls button, .advanced-settings button {
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     border-top-color: #ddd;
+     border-left-color: #ddd;
+     color: #000;
+     padding: 5px 10px;
+     font-family: 'Courier New', monospace;
+     font-size: 12px;
+     cursor: pointer;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+     min-width: 80px;
+     text-align: center;
+}
+ .controls button:hover {
+     background: linear-gradient(to bottom, #ddd, #aaa);
+}
+ .controls button.active {
+     background: linear-gradient(to bottom, #ffcc00, #cc9900);
+     box-shadow: inset 0 0 2px #666;
+}
+ .controls .control-group {
+     display: flex;
+     align-items: center;
+     gap: 5px;
+}
+ .controls label {
+     font-family: 'Courier New', monospace;
+     font-size: 12px;
+     color: #fff;
+}
+ .controls input[type="range"] {
+     -webkit-appearance: none;
+     appearance: none;
+     width: 100px;
+     height: 12px;
+     background: linear-gradient(to bottom, #999, #ccc);
+     border: 1px solid #666;
+     border-top-color: #ddd;
+     border-left-color: #ddd;
+     box-shadow: inset 0 0 2px #666;
+     border-radius: 2px;
+     cursor: pointer;
+}
+ .controls input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none;
+     appearance: none;
+     width: 16px;
+     height: 16px;
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+}
+ .controls input[type="range"]::-moz-range-thumb {
+     width: 16px;
+     height: 16px;
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+}
+ .paint-tools {
+     background: #333;
+     padding: 10px;
+     display: none;
+     flex-wrap: wrap;
+     gap: 8px;
+     align-items: center;
+     justify-content: center;
+     border-top: 1px solid #666;
+     border-bottom: 1px solid #666;
+}
+ .paint-tools.active {
+     display: flex;
+}
+ .paint-tools button {
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     border-top-color: #ddd;
+     border-left-color: #ddd;
+     color: #000;
+     padding: 5px 10px;
+     font-family: 'Courier New', monospace;
+     font-size: 12px;
+     cursor: pointer;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+     min-width: 80px;
+     text-align: center;
+}
+ .paint-tools button:hover {
+     background: linear-gradient(to bottom, #ddd, #aaa);
+}
+ .paint-tools button.active {
+     background: linear-gradient(to bottom, #ffcc00, #cc9900);
+     box-shadow: inset 0 0 2px #666;
+}
+ .paint-tools label {
+     font-family: 'Courier New', monospace;
+     font-size: 12px;
+     color: #fff;
+}
+ .paint-tools input[type="color"] {
+     width: 40px;
+     height: 20px;
+     padding: 2px;
+     border: 1px solid #666;
+     border-radius: 2px;
+     cursor: pointer;
+}
+ .paint-tools input[type="range"] {
+     -webkit-appearance: none;
+     appearance: none;
+     width: 100px;
+     height: 12px;
+     background: linear-gradient(to bottom, #999, #ccc);
+     border: 1px solid #666;
+     border-top-color: #ddd;
+     border-left-color: #ddd;
+     box-shadow: inset 0 0 2px #666;
+     border-radius: 2px;
+     cursor: pointer;
+}
+ .paint-tools input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none;
+     appearance: none;
+     width: 16px;
+     height: 16px;
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+}
+ .paint-tools input[type="range"]::-moz-range-thumb {
+     width: 16px;
+     height: 16px;
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+}
+ .paint-tools select {
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     border-top-color: #ddd;
+     border-left-color: #ddd;
+     color: #000;
+     padding: 5px;
+     font-family: 'Courier New', monospace;
+     font-size: 12px;
+     cursor: pointer;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+     border-radius: 2px;
+}
+ .paint-tools select:hover {
+     background: linear-gradient(to bottom, #ddd, #aaa);
+}
+ .advanced-settings {
+     position: absolute;
+     right: 0;
+     top: 0;
+     width: 250px;
+     height: 100%;
+     background: #2a2a2a;
+     transform: translateX(100%);
+     transition: transform 0.3s ease;
+     padding: 10px;
+     box-sizing: border-box;
+     overflow-y: auto;
+     z-index: 2;
+}
+ .advanced-settings.open {
+     transform: translateX(0);
+}
+ .advanced-settings h3 {
+     font-family: 'Courier New', monospace;
+     font-size: 14px;
+     margin: 10px 0;
+     color: #fff;
+}
+ .advanced-settings label {
+     display: block;
+     margin: 5px 0;
+     font-family: 'Courier New', monospace;
+     font-size: 12px;
+     color: #fff;
+}
+ .advanced-settings input[type="range"] {
+     -webkit-appearance: none;
+     appearance: none;
+     width: 100%;
+     height: 12px;
+     background: linear-gradient(to bottom, #999, #ccc);
+     border: 1px solid #666;
+     border-top-color: #ddd;
+     border-left-color: #ddd;
+     box-shadow: inset 0 0 2px #666;
+     border-radius: 2px;
+     cursor: pointer;
+}
+ .advanced-settings input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none;
+     appearance: none;
+     width: 16px;
+     height: 16px;
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+}
+ .advanced-settings input[type="range"]::-moz-range-thumb {
+     width: 16px;
+     height: 16px;
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #666;
+}
+ .advanced-settings canvas#lowpass {
+     width: 100%;
+     height: 40px;
+     background: linear-gradient(to bottom, #999, #ccc);
+     border: 1px solid #666;
+     border-top-color: #ddd;
+     border-left-color: #ddd;
+     box-shadow: inset 0 0 2px #666;
+     border-radius: 2px;
+     cursor: pointer;
+}
+ .toggle-switch {
+     position: relative;
+     display: block;
+     width: 40px;
+     height: 20px;
+     vertical-align: middle;
+}
+ .toggle-switch input {
+     opacity: 0;
+     width: 0;
+     height: 0;
+}
+ .toggle-slider {
+     position: absolute;
+     cursor: pointer;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background: linear-gradient(to bottom, #999, #ccc);
+     border: 1px solid #666;
+     border-radius: 20px;
+     box-shadow: inset 0 0 2px #666;
+     transition: 0.3s;
+}
+ .toggle-slider:before {
+     position: absolute;
+     content: "";
+     height: 14px;
+     width: 14px;
+     left: 3px;
+     bottom: 2px;
+     background: linear-gradient(to bottom, #ccc, #999);
+     border: 1px solid #666;
+     border-radius: 50%;
+     box-shadow: inset 1px 1px 0 #fff;
+     transition: 0.3s;
+}
+ input:checked + .toggle-slider {
+     background: linear-gradient(to bottom, #00cc00, #009900);
+}
+ input:checked + .toggle-slider:before {
+     transform: translateX(20px);
+}
+ .popup {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: rgba(0,0,0,0.7);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     z-index: 1000;
+}
+ .popup-content {
+     background: #2ae3d0;
+     border: 2px solid #666;
+     padding: 20px;
+     max-width: 400px;
+     text-align: center;
+     font-family: 'Courier New', monospace;
+     font-size: 14px;
+     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+ @media (max-width: 600px) {
+     .player-container {
+         width: 95vw;
+    }
+     .video-container {
+         max-height: 40vh;
+    }
+     .controls {
+         flex-direction: column;
+         align-items: stretch;
+         gap: 10px;
+         padding: 8px;
+    }
+     .controls .control-group {
+         flex-direction: column;
+         align-items: stretch;
+    }
+     .controls input[type="range"] {
+         width: 100%;
+    }
+     .controls button {
+         width: 100%;
+         padding: 8px;
+    }
+     .paint-tools {
+         flex-direction: column;
+         align-items: stretch;
+    }
+     .paint-tools input[type="color"] {
+         width: 100%;
+         height: 30px;
+    }
+     .paint-tools input[type="range"] {
+         width: 100%;
+    }
+     .paint-tools select {
+         width: 100%;
+         padding: 8px;
+    }
+     .paint-tools button {
+         width: 100%;
+         padding: 8px;
+    }
+     .advanced-settings {
+         width: 100%;
+         transform: translateY(100%);
+         top: auto;
+         bottom: 0;
+         height: 60%;
+    }
+     .advanced-settings.open {
+         transform: translateY(0);
+    }
+     .advanced-settings canvas#lowpass {
+         height: 30px;
+    }
+     .popup-content {
+         width: 90%;
+    }
+}
+ @media (orientation: landscape) and (max-width: 900px) {
+     .player-container {
+         width: 100vw;
+         max-width: none;
+    }
+     .video-container {
+         max-height: 50vh;
+    }
+     .advanced-settings {
+         height: 100%;
+         width: 40%;
+         transform: translateX(100%);
+    }
+     .advanced-settings.open {
+         transform: translateX(0);
+    }
+}
+ .vjs-control-bar {
+     display: none !important;
+}
+ .vjs-loading-spinner {
+     z-index: 3;
+}
