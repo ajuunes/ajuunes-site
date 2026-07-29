@@ -14,7 +14,7 @@ const icons = [{
         contentUrl: "assets/apps/word/word_index.html"
     },
     {
-        name: "live.schwwaaa.net",
+        name: "Schwwaaa LIVE Online",
         icon: "assets/apps/liveschwwaaanet/live_icon.png",
         contentUrl: "assets/apps/liveschwwaaanet/schwwaa_live_player.html"
     },
