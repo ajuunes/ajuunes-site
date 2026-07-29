@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+
+ ______
+|_,.,--\
+   ||
+   ||
+   ##
+   ##             agamemnonjuunes.link
+
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HLS Media Player</title>
+  <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet">
+    <link href="./css/player-style.css" rel="stylesheet">
+
+  <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+  <style>
+    
+  </style>
+</head>
+<body style="margin:0; background:transparent; overflow:hidden;">
+  <div class="popup" id="welcomePopup">
+    <div class="popup-content">
+      <h3>Welcome to Schwwaaa Live Online Player</h3>
+      <p>Experience our advanced web-based media player with fine-grained audio and video controls. Click OK to start watching Schwwaaa. </p>
+      <p>TYSM.</p>
+      <button onclick="startStream()">OK</button>
+    </div>
+  </div>
+  <div class="player-container" style="margin: 0 auto; position: relative;">
+    <div class="title-bar">
+      <span>Schwwaaa Live Online Media Player</span>
+    </div>
+    <div class="video-container">
+      <video id="video" class="video-js" preload="auto"></video>
+      <canvas id="paintCanvas"></canvas>
+    </div>
+    <div class="controls">
+      <button id="playPauseBtn" onclick="togglePlay()">Pause</button>
+      <button id="muteBtn" onclick="toggleMute()">Mute</button>
+      <div class="control-group">
+        <label>Volume</label>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+      </div>
+      <button id="paintBtn" onclick="togglePaint()">Paint</button>
+      <button id="settingsBtn" onclick="toggleSettings()">Settings</button>
+      <button id="fullscreenBtn" onclick="toggleFullscreen()">Fullscreen</button>
+    </div>
+    <div class="paint-tools" id="paintTools">
+      <div class="control-group">
+        <label>Color</label>
+        <input type="color" id="paintColor" value="#ff0000">
+      </div>
+      <div class="control-group">
+        <label>Size</label>
+        <input type="range" id="paintSize" min="1" max="20" step="1" value="5">
+      </div>
+      <div class="control-group">
+        <label>Tip</label>
+        <select id="paintTip">
+          <option value="round" selected>Round</option>
+          <option value="square">Square</option>
+          <option value="bevel">Bevel</option>
+        </select>
+      </div>
+      <button id="clearCanvas">Clear Canvas</button>
+      <button id="closePaint">Close Paint</button>
+    </div>
+    <div class="container">
+      <canvas id="waveform"></canvas>
+    </div>
+    <div class="advanced-settings" id="settings">
+      <h3>Video Controls</h3>
+      <button class="close-settings" id="closeSettings">Close Settings</button>
+      <button id="resetSettings">Reset to Default</button>
+      <label>Contrast: <input type="range" id="contrast" min="0" max="2" step="0.01" value="1"></label>
+      <label>Saturation: <input type="range" id="saturation" min="0" max="2" step="0.01" value="1"></label>
+      <label>Brightness: <input type="range" id="brightness" min="0" max="2" step="0.01" value="1"></label>
+      <label>Invert: 
+        <span class="toggle-switch">
+          <input type="checkbox" id="invert">
+          <span class="toggle-slider"></span>
+        </span>
+      </label>
+      <label>Grayscale: <input type="range" id="grayscale" min="0" max="1" step="0.01" value="0"></label>
+      <label>Sepia: <input type="range" id="sepia" min="0" max="1" step="0.01" value="0"></label>
+      <label>Hue Rotate: <input type="range" id="hueRotate" min="0" max="360" step="1" value="0"></label>
+      <label>Blur: <input type="range" id="blur" min="0" max="10" step="0.1" value="0"></label>
+      <h3>Audio Controls</h3>
+      <label>Low-Pass Freq: <canvas id="lowpass"></canvas></label>
+      <label>Pan: <input type="range" id="pan" min="-1" max="1" step="0.01" value="0"></label>
+      <label>Low EQ: <input type="range" id="eq-low" min="-12" max="12" step="0.1" value="0"></label>
+      <label>Mid EQ: <input type="range" id="eq-mid" min="-12" max="12" step="0.1" value="0"></label>
+      <label>High EQ: <input type="range" id="eq-high" min="-12" max="12" step="0.1" value="0"></label>
+    </div>
+  </div>
+  
+
+  <script>
+    // Initialize DOM elements
+    const videoElement = document.getElementById('video');
+    const video = videojs(videoElement, {
+      fluid: true,
+      controls: false
+    });
+    const volume = document.getElementById('volume');
+    const settings = document.getElementById('settings');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const contrast = document.getElementById('contrast');
+    const saturation = document.getElementById('saturation');
+    const brightness = document.getElementById('brightness');
+    const invert = document.getElementById('invert');
+    const grayscale = document.getElementById('grayscale');
+    const sepia = document.getElementById('sepia');
+    const hueRotate = document.getElementById('hueRotate');
+    const blur = document.getElementById('blur');
+    const pan = document.getElementById('pan');
+    const lowpass = document.getElementById('lowpass');
+    const eqLow = document.getElementById('eq-low');
+    const eqMid = document.getElementById('eq-mid');
+    const eqHigh = document.getElementById('eq-high');
+    const waveform = document.getElementById('waveform');
+    const welcomePopup = document.getElementById('welcomePopup');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const muteBtn = document.getElementById('muteBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const resetSettings = document.getElementById('resetSettings');
+    const paintBtn = document.getElementById('paintBtn');
+    const paintTools = document.getElementById('paintTools');
+    const paintCanvas = document.getElementById('paintCanvas');
+    const paintColor = document.getElementById('paintColor');
+    const paintSize = document.getElementById('paintSize');
+    const paintTip = document.getElementById('paintTip');
+    const clearCanvas = document.getElementById('clearCanvas');
+    const closePaint = document.getElementById('closePaint');
+
+    // Log video element visibility
+    function logVisibility() {
+      const rect = videoElement.getBoundingClientRect();
+      console.log('Video element visibility:', {
+        display: window.getComputedStyle(videoElement).display,
+        visibility: window.getComputedStyle(videoElement).visibility,
+        width: rect.width,
+        height: rect.height,
+        top: rect.top,
+        left: rect.left
+      });
+    }
+
+    // Web Audio API Setup
+    let audioCtx, source, panner, lowpassFilter, eqLowNode, eqMidNode, eqHighNode, analyser;
+    function initAudio() {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      source = audioCtx.createMediaElementSource(videoElement);
+      panner = audioCtx.createStereoPanner();
+      lowpassFilter = audioCtx.createBiquadFilter();
+      lowpassFilter.type = 'lowpass';
+      lowpassFilter.frequency.setValueAtTime(20000, audioCtx.currentTime);
+      eqLowNode = audioCtx.createBiquadFilter();
+      eqLowNode.type = 'lowshelf';
+      eqLowNode.frequency.setValueAtTime(200, audioCtx.currentTime);
+      eqMidNode = audioCtx.createBiquadFilter();
+      eqMidNode.type = 'peaking';
+      eqMidNode.frequency.setValueAtTime(1000, audioCtx.currentTime);
+      eqHighNode = audioCtx.createBiquadFilter();
+      eqHighNode.type = 'highshelf';
+      eqHighNode.frequency.setValueAtTime(4000, audioCtx.currentTime);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 2048;
+      source.connect(panner).connect(lowpassFilter).connect(eqLowNode).connect(eqMidNode).connect(eqHighNode).connect(analyser).connect(audioCtx.destination);
+    }
+
+    // Waveform Visualization
+    function drawWaveform() {
+      if (!analyser) return;
+      requestAnimationFrame(drawWaveform);
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteTimeDomainData(dataArray);
+      const canvasCtx = waveform.getContext('2d');
+      canvasCtx.fillStyle = '#222';
+      canvasCtx.fillRect(0, 0, waveform.width, waveform.height);
+      canvasCtx.lineWidth = 2;
+      canvasCtx.strokeStyle = '#00cc00';
+      canvasCtx.beginPath();
+      const sliceWidth = waveform.width / bufferLength;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        const v = dataArray[i] / 128.0;
+        const y = (v * waveform.height) / 2;
+        if (i === 0) {
+          canvasCtx.moveTo(x, y);
+        } else {
+          canvasCtx.lineTo(x, y);
+        }
+        x += sliceWidth;
+      }
+      canvasCtx.lineTo(waveform.width, waveform.height / 2);
+      canvasCtx.stroke();
+    }
+
+    // Low-Pass Graphical Slider
+    let lowpassValue = 20000;
+    function drawLowpassSlider() {
+      const canvas = lowpass;
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width;
+      const height = canvas.height;
+      ctx.fillStyle = '#222';
+      ctx.fillRect(0, 0, width, height);
+      ctx.strokeStyle = '#00cc00';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      const freq = lowpassValue;
+      const minFreq = 20;
+      const maxFreq = 20000;
+      const logFreq = Math.log10(freq);
+      const logMin = Math.log10(minFreq);
+      const logMax = Math.log10(maxFreq);
+      const x = ((logFreq - logMin) / (logMax - logMin)) * width;
+      ctx.moveTo(x, height);
+      ctx.lineTo(x, 0);
+      ctx.stroke();
+      ctx.font = '10px "Courier New", monospace';
+      ctx.fillStyle = '#fff';
+      ctx.fillText(`${Math.round(freq)} Hz`, x < width - 50 ? x + 5 : x - 45, 15);
+    }
+    function updateLowpass(e) {
+      const canvas = lowpass;
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const minFreq = 20;
+      const maxFreq = 20000;
+      const logMin = Math.log10(minFreq);
+      const logMax = Math.log10(maxFreq);
+      const logFreq = logMin + x * (logMax - logMin);
+      lowpassValue = Math.pow(10, logFreq);
+      lowpassValue = Math.max(minFreq, Math.min(maxFreq, lowpassValue));
+      if (lowpassFilter) lowpassFilter.frequency.setValueAtTime(lowpassValue, audioCtx.currentTime);
+      drawLowpassSlider();
+    }
+    lowpass.addEventListener('mousedown', (e) => {
+      updateLowpass(e);
+      const onMouseMove = (e) => updateLowpass(e);
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', () => {
+        document.removeEventListener('mousemove', onMouseMove);
+      }, { once: true });
+    });
+    lowpass.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      updateLowpass(e.touches[0]);
+      const onTouchMove = (e) => updateLowpass(e.touches[0]);
+      document.addEventListener('touchmove', onTouchMove);
+      document.addEventListener('touchend', () => {
+        document.removeEventListener('touchmove', onTouchMove);
+      }, { once: true });
+    });
+
+    // Paint Mode
+    let isPainting = false;
+    function initPaintCanvas() {
+      paintCanvas.width = videoElement.clientWidth;
+      paintCanvas.height = videoElement.clientHeight;
+    }
+    function togglePaint() {
+      paintTools.classList.toggle('active');
+      paintBtn.classList.toggle('active');
+      paintCanvas.classList.toggle('active');
+      if (paintTools.classList.contains('active')) {
+        initPaintCanvas();
+      } else {
+        settings.classList.remove('open');
+        settingsBtn.classList.remove('active');
+      }
+    }
+    function getCanvasCoords(e) {
+      const rect = paintCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      return { x, y };
+    }
+    function setMarkerStyle(ctx) {
+      ctx.strokeStyle = paintColor.value;
+      ctx.lineWidth = paintSize.value;
+      if (paintTip.value === 'bevel') {
+        ctx.lineCap = 'square';
+        ctx.lineJoin = 'bevel';
+      } else {
+        ctx.lineCap = paintTip.value;
+        ctx.lineJoin = paintTip.value;
+      }
+    }
+    paintCanvas.addEventListener('mousedown', (e) => {
+      if (!paintCanvas.classList.contains('active')) return;
+      isPainting = true;
+      const { x, y } = getCanvasCoords(e);
+      const ctx = paintCanvas.getContext('2d');
+      setMarkerStyle(ctx);
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+    });
+    paintCanvas.addEventListener('mousemove', (e) => {
+      if (!isPainting || !paintCanvas.classList.contains('active')) return;
+      const { x, y } = getCanvasCoords(e);
+      const ctx = paintCanvas.getContext('2d');
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    });
+    paintCanvas.addEventListener('mouseup', () => {
+      isPainting = false;
+    });
+    paintCanvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      if (!paintCanvas.classList.contains('active')) return;
+      isPainting = true;
+      const { x, y } = getCanvasCoords(e.touches[0]);
+      const ctx = paintCanvas.getContext('2d');
+      setMarkerStyle(ctx);
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+    });
+    paintCanvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      if (!isPainting || !paintCanvas.classList.contains('active')) return;
+      const { x, y } = getCanvasCoords(e.touches[0]);
+      const ctx = paintCanvas.getContext('2d');
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    });
+    paintCanvas.addEventListener('touchend', () => {
+      isPainting = false;
+    });
+    paintColor.addEventListener('input', () => {
+      if (isPainting) {
+        const ctx = paintCanvas.getContext('2d');
+        setMarkerStyle(ctx);
+        ctx.beginPath();
+      }
+    });
+    paintSize.addEventListener('input', () => {
+      if (isPainting) {
+        const ctx = paintCanvas.getContext('2d');
+        setMarkerStyle(ctx);
+        ctx.beginPath();
+      }
+    });
+    paintTip.addEventListener('change', () => {
+      if (isPainting) {
+        const ctx = paintCanvas.getContext('2d');
+        setMarkerStyle(ctx);
+        ctx.beginPath();
+      }
+    });
+    clearCanvas.addEventListener('click', () => {
+      const ctx = paintCanvas.getContext('2d');
+      ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+    });
+    closePaint.addEventListener('click', () => {
+      paintTools.classList.remove('active');
+      paintBtn.classList.remove('active');
+      paintCanvas.classList.remove('active');
+    });
+
+    // Start Stream
+    function startStream() {
+      welcomePopup.style.display = 'none';
+      video.src({
+        src: 'https://live.schwwaaa.net/hls/stream.m3u8',
+        type: 'application/x-mpegURL'
+      });
+      initAudio();
+      video.play().catch((e) => {
+        console.error('Playback failed:', e);
+      });
+      video.on('error', (e) => {
+        console.error('Video.js error:', e, video.error());
+      });
+      video.on('stalled', () => {
+        console.log('Video stalled, attempting to resume');
+        video.play();
+      });
+      video.on('loadedmetadata', () => {
+        console.log('Metadata loaded');
+        logVisibility();
+        initPaintCanvas();
+      });
+      video.on('loadeddata', () => {
+        console.log('Data loaded, video should start soon');
+        logVisibility();
+      });
+      video.on('canplay', () => {
+        console.log('Can play, starting playback');
+        video.play();
+      });
+      video.on('playing', () => {
+        console.log('Video is playing');
+        logVisibility();
+      });
+      video.on('waiting', () => {
+        console.log('Video is waiting/buffering');
+        logVisibility();
+      });
+      drawWaveform();
+      drawLowpassSlider();
+    }
+
+    // Video Controls
+    function updateVideoFilters() {
+      const invertValue = invert.checked ? 'invert(1)' : 'invert(0)';
+      videoElement.style.filter = `
+        contrast(${contrast.value})
+        saturate(${saturation.value})
+        brightness(${brightness.value})
+        ${invertValue}
+        grayscale(${grayscale.value})
+        sepia(${sepia.value})
+        hue-rotate(${hueRotate.value}deg)
+        blur(${blur.value}px)
+      `;
+    }
+    contrast.addEventListener('input', updateVideoFilters);
+    saturation.addEventListener('input', updateVideoFilters);
+    brightness.addEventListener('input', updateVideoFilters);
+    invert.addEventListener('change', updateVideoFilters);
+    grayscale.addEventListener('input', updateVideoFilters);
+    sepia.addEventListener('input', updateVideoFilters);
+    hueRotate.addEventListener('input', updateVideoFilters);
+    blur.addEventListener('input', updateVideoFilters);
+
+    // Audio Controls
+    pan.addEventListener('input', () => {
+      if (panner) panner.pan.setValueAtTime(pan.value, audioCtx.currentTime);
+    });
+    eqLow.addEventListener('input', () => {
+      if (eqLowNode) eqLowNode.gain.setValueAtTime(eqLow.value, audioCtx.currentTime);
+    });
+    eqMid.addEventListener('input', () => {
+      if (eqMidNode) eqMidNode.gain.setValueAtTime(eqMid.value, audioCtx.currentTime);
+    });
+    eqHigh.addEventListener('input', () => {
+      if (eqHighNode) eqHighNode.gain.setValueAtTime(eqHigh.value, audioCtx.currentTime);
+    });
+
+    // Reset Settings
+    function resetSettingsToDefault() {
+      contrast.value = 1;
+      saturation.value = 1;
+      brightness.value = 1;
+      invert.checked = false;
+      grayscale.value = 0;
+      sepia.value = 0;
+      hueRotate.value = 0;
+      blur.value = 0;
+      pan.value = 0;
+      lowpassValue = 20000;
+      eqLow.value = 0;
+      eqMid.value = 0;
+      eqHigh.value = 0;
+      updateVideoFilters();
+      if (panner) panner.pan.setValueAtTime(0, audioCtx.currentTime);
+      if (lowpassFilter) lowpassFilter.frequency.setValueAtTime(20000, audioCtx.currentTime);
+      if (eqLowNode) eqLowNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      if (eqMidNode) eqMidNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      if (eqHighNode) eqHighNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      drawLowpassSlider();
+      const ctx = paintCanvas.getContext('2d');
+      ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+    }
+    resetSettings.addEventListener('click', resetSettingsToDefault);
+
+    // Playback Controls
+    function togglePlay() {
+      if (video.paused()) {
+        console.log('Attempting to play video');
+        video.play().catch((e) => console.error('Play failed:', e));
+        playPauseBtn.textContent = 'Pause';
+      } else {
+        console.log('Pausing video');
+        video.pause();
+        playPauseBtn.textContent = 'Play';
+      }
+    }
+
+    function toggleMute() {
+      video.muted(!video.muted());
+      muteBtn.textContent = video.muted() ? 'Unmute' : 'Mute';
+    }
+
+    volume.addEventListener('input', () => {
+      video.volume(volume.value);
+      if (volume.value === '0') {
+        video.muted(true);
+        muteBtn.textContent = 'Unmute';
+      } else {
+        video.muted(false);
+        muteBtn.textContent = 'Mute';
+      }
+    });
+
+    // Fullscreen Control
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        videoElement.requestFullscreen().catch((e) => console.error('Fullscreen failed:', e));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Settings Toggle
+    function toggleSettings() {
+      settings.classList.toggle('open');
+      settingsBtn.classList.toggle('active');
+      if (settings.classList.contains('open')) {
+        paintTools.classList.remove('active');
+        paintBtn.classList.remove('active');
+        paintCanvas.classList.remove('active');
+      }
+    }
+
+    const closeSettings = document.getElementById('closeSettings');
+    closeSettings.addEventListener('click', () => {
+      settings.classList.remove('open');
+      settingsBtn.classList.remove('active');
+    });
+
+    // Touch Support for Mobile
+    settings.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+    });
+
+    // Iframe Compatibility
+    window.addEventListener('resize', () => {
+      videoElement.style.width = '100%';
+      videoElement.style.height = '100%';
+      waveform.width = waveform.parentElement.clientWidth;
+      lowpass.width = lowpass.parentElement.clientWidth;
+      paintCanvas.width = videoElement.clientWidth;
+      paintCanvas.height = videoElement.clientHeight;
+      const ctx = paintCanvas.getContext('2d');
+      ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height); // Clear on resize to prevent distortion
+    });
+
+    // Initialize canvas size
+    waveform.width = waveform.parentElement.clientWidth;
+    waveform.height = 60;
+    lowpass.width = lowpass.parentElement.clientWidth;
+    lowpass.height = window.innerWidth <= 600 ? 30 : 40;
+    drawLowpassSlider();
+
+    function postHeight() {
+    const height = document.querySelector('.player-container').offsetHeight;
+    parent.postMessage({ type: 'resizeIframe', height: height + 40 }, '*');
+    }
+
+    window.addEventListener('load', postHeight);
+    window.addEventListener('resize', postHeight);
+  </script>
+</body>
+</html>
