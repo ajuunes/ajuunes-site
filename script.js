@@ -233,8 +233,19 @@ const ctx = canvas.getContext("2d", {
     willReadFrequently: true
 });
 
-const logo = new Image();
-logo.src = floating_logo
+const logo = document.createElement("img");
+logo.src = floating_logo;
+logo.alt = "";
+logo.style.position = "fixed";
+logo.style.top = "0";
+logo.style.left = "0";
+logo.style.width = "100px";
+logo.style.height = "100px";
+logo.style.objectFit = "contain";
+logo.style.zIndex = "1";
+logo.style.pointerEvents = "none";
+logo.style.willChange = "transform";
+document.body.appendChild(logo);
 
 let x = 100,
     y = 100;
@@ -291,7 +302,7 @@ function draw() {
         currentColor = getRandomColor();
     }
 
-    ctx.drawImage(logo, x, y, size, size);
+    logo.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
     requestAnimationFrame(draw);
 }
