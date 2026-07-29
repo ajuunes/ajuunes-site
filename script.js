@@ -233,19 +233,8 @@ const ctx = canvas.getContext("2d", {
     willReadFrequently: true
 });
 
-const logo = document.createElement("img");
-logo.src = floating_logo;
-logo.alt = "";
-logo.style.position = "fixed";
-logo.style.top = "0";
-logo.style.left = "0";
-logo.style.width = "100px";
-logo.style.height = "100px";
-logo.style.objectFit = "contain";
-logo.style.zIndex = "1";
-logo.style.pointerEvents = "none";
-logo.style.willChange = "transform";
-document.body.appendChild(logo);
+const logo = new Image();
+logo.src = floating_logo
 
 let x = 100,
     y = 100;
@@ -302,7 +291,7 @@ function draw() {
         currentColor = getRandomColor();
     }
 
-    logo.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    ctx.drawImage(logo, x, y, size, size);
 
     requestAnimationFrame(draw);
 }
@@ -320,7 +309,7 @@ const marqueeMessages = [
     "📧 contact@agamemnonjuunes.linlk 📧",
     "🐈 all new derpy cats! coming soon! 😾",
     "🔜 all new Cooking School FAQ is in the works - Soups On!🍲",
-    "🖼️ come visit me and schwwaaa in minneapolis, mn at VideoSync 2026 sept 26-27 - more at videosync.xyz",
+    "🖼️ come visit me and schwwaaa in minneapolis, mn at VideoSync 2026 sept 26-27 - more at videosync.xyz/",
     "🌐 dumbterm - the web terminal you didn't know you needed! 💻",
     "📺 Videobeaux - it's your best friend! Now with a GUI! 📺",
     "⏯️ The VideoSampler10 is now opertional! ✅",
