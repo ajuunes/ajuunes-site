@@ -473,3 +473,233 @@ html, body {
  .vjs-loading-spinner {
      z-index: 3;
 }
+
+/* =========================================================
+   Embedded-window sizing and responsive overrides
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+body {
+    display: block;
+}
+
+.player-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.title-bar,
+.controls,
+.paint-tools,
+.container {
+    flex: 0 0 auto;
+    min-width: 0;
+}
+
+.title-bar {
+    overflow: hidden;
+}
+
+.title-bar span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.video-container {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    aspect-ratio: auto;
+}
+
+.video-js,
+.video-js video,
+.vjs-tech {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+}
+
+.controls {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+
+.controls > * {
+    flex: 0 0 auto;
+}
+
+.paint-tools.active {
+    flex-wrap: wrap;
+    max-height: 42%;
+    overflow-y: auto;
+}
+
+.container {
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+#waveform {
+    display: block;
+    max-width: 100%;
+}
+
+.advanced-settings {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.popup {
+    padding: 12px;
+}
+
+.popup-content {
+    width: min(400px, 100%);
+    max-width: 100%;
+    max-height: calc(100% - 24px);
+    overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+    .player-container {
+        width: 100%;
+    }
+
+    .title-bar {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .video-container {
+        max-height: none;
+    }
+
+    .controls {
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        padding: 6px;
+    }
+
+    .controls .control-group {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .controls input[type="range"] {
+        width: 90px;
+    }
+
+    .controls button {
+        width: auto;
+        min-width: 72px;
+        padding: 6px 8px;
+    }
+
+    .paint-tools.active {
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        padding: 6px;
+        max-height: 50%;
+    }
+
+    .paint-tools .control-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .paint-tools input[type="color"] {
+        width: 42px;
+        height: 28px;
+    }
+
+    .paint-tools input[type="range"] {
+        width: 90px;
+    }
+
+    .paint-tools select,
+    .paint-tools button {
+        width: auto;
+        min-width: 72px;
+        padding: 6px 8px;
+    }
+
+    .advanced-settings {
+        width: 100%;
+        height: min(68%, 520px);
+        max-height: 100%;
+    }
+
+    #waveform {
+        height: 42px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 900px) {
+    .player-container {
+        width: 100%;
+    }
+
+    .video-container {
+        max-height: none;
+    }
+
+    .advanced-settings {
+        width: min(44%, 320px);
+        height: 100%;
+        max-height: 100%;
+    }
+}
+
+@media (max-height: 520px) {
+    .title-bar {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    .controls {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    #waveform {
+        height: 36px;
+    }
+
+    .paint-tools.active {
+        max-height: 55%;
+    }
+}
