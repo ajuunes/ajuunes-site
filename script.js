@@ -65,7 +65,7 @@ const icons = [{
         icon: "assets/apps/vs10/vs10_icon.png",
         contentUrl: "https://schwwaaa.github.io/VideoSampler10_VS10/"
     }
-               
+
                /*
     {
         name: "CardQuest.Zone",
@@ -157,12 +157,12 @@ function openWindow(title, contentUrl) {
     //const winHeight = Math.min(window.innerHeight * 0.8, 700); // max 700px or 80% of screen
     //win.style.width = `${winWidth}px`;
     //win.style.height = `${winHeight}px`;
-        
+
     const winWidth = 90; 
     const winHeight = 85; 
     win.style.width = `${winWidth}%`;
     win.style.height = `${winHeight}%`;
-        
+
     win.style.position = "fixed";
     win.style.left = "50%";
     win.style.top = "50%";
