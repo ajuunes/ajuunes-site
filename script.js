@@ -14,7 +14,7 @@ const icons = [{
         contentUrl: "assets/apps/word/word_index.html"
     },
     {
-        name: "Schwwaaa LIVE Online",
+        name: "schwwaaa LIVE Online",
         icon: "assets/apps/liveschwwaaanet/live_icon.png",
         contentUrl: "assets/apps/liveschwwaaanet/schwwaa_live_player.html"
     },
@@ -56,7 +56,7 @@ const icons = [{
         contentUrl: "https://videobeaux.online"
     },
     {
-        name: "Schwwaaa",
+        name: "schwwaaa",
         icon: "assets/apps/schwwaaa/schwwaaa_logo_icon.png",
         contentUrl: "https://schwwaaa.net"
     },
